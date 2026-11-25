@@ -28,6 +28,7 @@
 --on:light-dark(#0f7a8a,#5ccfdf);--onbg:light-dark(#dff2f4,#10292d);
 --kun:light-dark(#a96a00,#f2b84f);--kunbg:light-dark(#f8edd7,#2e2410);
 --ok:light-dark(#2d7a4f,#6fd19a);
+--btn:light-dark(#eeeef1,#26262b);--btnh:light-dark(#e3e3e8,#303036);--btnline:light-dark(#d2d2d8,#3a3a41);
 --mincho:"Shippori Mincho B1","Hiragino Mincho ProN","Yu Mincho",serif;
 --sans:"IBM Plex Sans JP","Hiragino Sans","Yu Gothic UI",system-ui,sans-serif}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
@@ -39,7 +40,13 @@ button,input,select{font:inherit;color:inherit}
 button{cursor:pointer}
 :focus-visible{outline:2px solid var(--sel);outline-offset:1px}
 .mc{font-family:var(--mincho)}
-.app{display:grid;grid-template-columns:232px minmax(300px,400px) minmax(0,1fr);height:calc(100vh / var(--z));width:100%}
+.app{--w1:232px;--w2:400px;display:grid;grid-template-columns:var(--w1) var(--w2) minmax(0,1fr);grid-template-rows:minmax(0,1fr);height:calc(100vh / var(--z));width:100%}
+.side{grid-area:1/1}.index{grid-area:1/2}.entry{grid-area:1/3}
+.rz{grid-row:1;justify-self:start;width:11px;margin-left:-6px;z-index:6;cursor:col-resize;touch-action:none;position:relative;outline:none}
+.rz::after{content:"";position:absolute;top:0;bottom:0;left:5px;width:1px;background:transparent;transition:background .12s,width .12s,left .12s}
+.rz:hover::after,.rz.drag::after,.rz:focus-visible::after{background:var(--sel);width:3px;left:4px}
+#rz1{grid-column:2}#rz2{grid-column:3}
+body.resizing{cursor:col-resize;user-select:none}body.resizing *{cursor:col-resize!important}
 
 /* ---------- sidebar ---------- */
 .side{background:var(--bg);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:18px 14px 14px;gap:22px;overflow:auto}
@@ -69,6 +76,7 @@ button{cursor:pointer}
 .zoom button{border:0;background:none;height:38px;font-size:14px;font-weight:600}
 .zoom button:hover{background:var(--line2)}
 .zoom output{text-align:center;font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums}
+.side{container-type:inline-size}
 .side .foot{margin-top:auto;display:flex;flex-direction:column;gap:8px}
 .credit{font-size:11.5px;color:var(--mute);line-height:1.45;padding:0 6px}
 
@@ -92,7 +100,7 @@ button{cursor:pointer}
 .empty{padding:28px 18px;color:var(--mute);font-size:14px}
 
 /* ---------- entry ---------- */
-.entry{background:var(--raise);overflow:auto;display:flex;flex-direction:column}
+.entry{background:var(--raise);overflow:auto;display:flex;flex-direction:column;container-type:inline-size;container-name:entry}
 .ehead{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:28px;padding:28px clamp(20px,3vw,44px) 24px;border-bottom:1px solid var(--line);align-items:start}
 .box{position:relative;width:clamp(150px,13vw,200px);aspect-ratio:1;border:1px solid var(--line);border-radius:6px;background:var(--pane)}
 .box svg{position:absolute;inset:0;width:100%;height:100%}
@@ -128,9 +136,11 @@ button{cursor:pointer}
 .usage .ub button[aria-pressed=false]{opacity:.35}
 .usage p{margin:0;font-size:12.5px;color:var(--mute)}
 .eact{display:flex;flex-direction:column;gap:8px;align-items:stretch}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:38px;padding:6px 14px;border-radius:7px;border:1px solid var(--line);background:var(--raise);font-size:13.5px;font-weight:500;white-space:nowrap}
-.btn:hover{border-color:var(--mute)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:7px 16px;border-radius:8px;border:1px solid var(--btnline);background:var(--btn);color:var(--ink);font-size:13.5px;font-weight:600;white-space:nowrap;transition:background .12s,border-color .12s}
+.btn:hover{background:var(--btnh)}
+.btn.pri{background:var(--ink);color:var(--raise);border-color:var(--ink)}.btn.pri:hover{background:color-mix(in srgb,var(--ink) 86%,var(--raise))}
 .btn.learned{background:var(--ok);border-color:var(--ok);color:var(--raise)}
+.btn.learned svg{stroke:currentColor}
 
 .wbar{position:sticky;top:0;z-index:2;background:var(--raise);display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between;padding:12px clamp(20px,3vw,44px);border-bottom:1px solid var(--line)}
 .wbar h3{margin:0;font-size:15px;font-weight:600;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
@@ -140,9 +150,26 @@ button{cursor:pointer}
 .seg{display:inline-flex;background:var(--pane);border:1px solid var(--line);border-radius:7px;padding:2px}
 .seg button{border:0;background:none;padding:4px 11px;min-height:32px;font-size:13px;border-radius:5px;color:var(--ink2)}
 .seg button[aria-pressed=true]{background:var(--raise);color:var(--ink);font-weight:600;box-shadow:0 0 0 1px var(--line)}
-select{min-height:36px;border:1px solid var(--line);border-radius:7px;background:var(--pane);padding:0 8px;font-size:13px}
-.chk{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);cursor:pointer;min-height:36px}
-.chk input{accent-color:var(--sel);width:16px;height:16px}
+.dd{position:relative}
+.ddb{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:5px 10px 5px 12px;border-radius:8px;border:1px solid var(--btnline);background:var(--btn);font-size:13px;white-space:nowrap}
+.ddb:hover{background:var(--btnh)}
+.ddb .dk{color:var(--mute)}.ddb .dv{font-weight:600}
+.ddb svg{color:var(--mute);transition:transform .15s}
+.ddb[aria-expanded=true]{border-color:var(--ink2)}.ddb[aria-expanded=true] svg{transform:rotate(180deg)}
+.ddm{position:absolute;top:calc(100% + 6px);left:0;z-index:30;min-width:max(100%,250px);background:var(--raise);border:1px solid var(--btnline);border-radius:10px;padding:6px;box-shadow:0 14px 40px rgb(0 0 0 / .35),0 2px 6px rgb(0 0 0 / .2);display:none}
+.dd.r .ddm{left:auto;right:0}
+.dd.open .ddm{display:block}
+.ddm h4{margin:4px 10px 6px;font-size:12px;font-weight:500;color:var(--mute)}
+.ddo{display:grid;grid-template-columns:18px minmax(0,1fr);gap:2px 8px;width:100%;text-align:left;border:0;background:none;border-radius:7px;padding:8px 10px;font-size:13.5px;color:var(--ink);align-items:center}
+.ddo:hover,.ddo:focus-visible{background:var(--btn);outline:none}
+.ddo .ck{grid-row:span 2;opacity:0;color:var(--ink)}.ddo[aria-selected=true] .ck{opacity:1}
+.ddo[aria-selected=true]{font-weight:600}
+.ddo small{grid-column:2;font-size:12px;color:var(--mute);font-weight:400}
+.tgl{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:5px 12px;border-radius:8px;border:1px solid var(--btnline);background:var(--btn);font-size:13px;font-weight:500}
+.tgl:hover{background:var(--btnh)}
+.tgl i{width:14px;height:14px;border-radius:4px;border:1.5px solid var(--mute);display:grid;place-items:center}
+.tgl[aria-pressed=true]{border-color:var(--ink2)}.tgl[aria-pressed=true] i{background:var(--ink);border-color:var(--ink)}
+.tgl[aria-pressed=true] i::after{content:"";width:7px;height:4px;border:2px solid var(--raise);border-top:0;border-right:0;transform:rotate(-45deg) translate(1px,-1px)}
 
 .words{list-style:none;margin:0;padding:4px clamp(20px,3vw,44px) 30px}
 .wr{display:grid;grid-template-columns:28px minmax(150px,220px) minmax(0,1fr) 128px 40px;gap:6px 20px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line2)}
@@ -203,7 +230,6 @@ mark.on{background:var(--onbg);color:var(--on)}mark.kun{background:var(--kunbg);
 .card .ex b{font:600 22px var(--mincho);grid-row:span 2}.card .ex .r{font:500 16px var(--sans);color:var(--ink2)}.card .ex .m{font-size:13px;color:var(--mute)}
 .card .row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .card .row .btn{min-height:46px;padding:8px 22px;font-size:15px}
-.btn.pri{background:var(--ink);color:var(--raise);border-color:var(--ink)}
 .card .hint{font-size:12px;color:var(--mute);text-align:center;padding:0 0 18px}
 .done{text-align:center;padding:30px}
 .done .gl{font-size:100px}
@@ -212,9 +238,23 @@ mark.on{background:var(--onbg);color:var(--on)}mark.kun{background:var(--kunbg);
 .toast.show{opacity:1}
 .back{display:none}
 
+/* ---------- pane-width layouts (the panes can be resized) ---------- */
+@container entry (max-width:860px){
+ .ehead{grid-template-columns:auto minmax(0,1fr);gap:22px}
+ .eact{grid-column:1/-1;flex-direction:row;flex-wrap:wrap}
+ .title{flex-direction:column;gap:6px}
+}
+@container entry (max-width:600px){
+ .ehead{grid-template-columns:minmax(0,1fr)}
+ .box{width:200px}.ehead>div:first-child{width:200px;max-width:100%}
+ .wr{grid-template-columns:22px minmax(0,1fr) auto 40px}
+ .wr .info{grid-column:2/-1;grid-row:2}.fq .lvl,.fq .fl{display:none}
+}
 /* ---------- responsive ---------- */
 @media(max-width:1180px){
- .app{grid-template-columns:minmax(280px,340px) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+ .app{grid-template-columns:var(--w2) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
+ .side{grid-area:1/1/2/3}.index{grid-area:2/1}.entry{grid-area:2/2}
+ #rz1{display:none}#rz2{grid-column:2;grid-row:2}
  .side{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;padding:10px 14px;gap:10px 18px;border-right:0;border-bottom:1px solid var(--line);overflow:visible}
  .side .grp h3,.credit,.brand small{display:none}
  .lvls{flex-direction:row}
@@ -226,6 +266,7 @@ mark.on{background:var(--onbg);color:var(--on)}mark.kun{background:var(--kunbg);
 @media(max-width:760px){
  body{overflow:auto}
  .app{display:flex;flex-direction:column;height:auto;min-height:100vh}
+ .rz{display:none}
  .index,.entry{overflow:visible;border-right:0}
  .kgrid{overflow:visible}
  body.detail .index{display:none}
@@ -267,6 +308,8 @@ mark.on{background:var(--onbg);color:var(--on)}mark.kun{background:var(--kunbg);
   </div>
   <div class="kgrid" id="kgrid"></div>
  </section>
+ <div class="rz" id="rz1" role="separator" aria-orientation="vertical" aria-label="Resize sidebar" tabindex="0" title="Drag to resize · double-click to reset"></div>
+ <div class="rz" id="rz2" role="separator" aria-orientation="vertical" aria-label="Resize kanji index" tabindex="0" title="Drag to resize · double-click to reset"></div>
  <main class="entry" id="entry" aria-live="polite"><div class="empty">Loading the kanji lists…</div></main>
 </div>
 <div class="fc" id="fc" role="dialog" aria-modal="true" aria-label="Flashcards"><div class="card" id="card"></div></div>
@@ -294,8 +337,31 @@ let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('sh
 /* zoom */
 const ZS=[.8,.9,1,1.1,1.25,1.4,1.6,1.8];let zi=ZS.indexOf(store.get('zoom',1));if(zi<0)zi=2;
 function applyZoom(){const z=ZS[zi];document.documentElement.style.zoom=z;document.documentElement.style.setProperty('--z',z);$('#zval').textContent=Math.round(z*100)+'%';store.set('zoom',z)}
-function zoomBy(d){zi=Math.min(ZS.length-1,Math.max(0,zi+d));applyZoom()}
+function zoomBy(d){zi=Math.min(ZS.length-1,Math.max(0,zi+d));applyZoom();if(typeof applyW==='function')applyW(false)}
 applyZoom();
+
+/* resizable panes */
+const app=$('.app'),DEF={w1:232,w2:400},LIM={w1:[180,380],w2:[240,720]};
+let W1=store.get('w1',DEF.w1),W2=store.get('w2',DEF.w2);
+const twoPane=()=>matchMedia('(max-width:1180px)').matches;
+function clampW(){const z=ZS[zi],total=app.getBoundingClientRect().width/z,minEntry=480;
+ W1=Math.round(Math.min(LIM.w1[1],Math.max(LIM.w1[0],W1)));
+ const used=twoPane()?0:W1;W2=Math.round(Math.min(LIM.w2[1],Math.max(LIM.w2[0],Math.min(W2,total-used-minEntry))))}
+function applyW(save){clampW();app.style.setProperty('--w1',W1+'px');app.style.setProperty('--w2',W2+'px');
+ $('#rz1').setAttribute('aria-valuenow',W1);$('#rz2').setAttribute('aria-valuenow',W2);if(save){store.set('w1',W1);store.set('w2',W2)}}
+function startDrag(which,e){
+ e.preventDefault();const h=e.currentTarget;h.setPointerCapture(e.pointerId);h.classList.add('drag');document.body.classList.add('resizing');
+ const z=ZS[zi],x0=e.clientX,a=W1,b=W2;
+ const move=ev=>{const d=(ev.clientX-x0)/z;if(which===1)W1=a+d;else W2=b+d;applyW(false)};
+ const up=()=>{h.classList.remove('drag');document.body.classList.remove('resizing');h.removeEventListener('pointermove',move);h.removeEventListener('pointerup',up);h.removeEventListener('pointercancel',up);applyW(true)};
+ h.addEventListener('pointermove',move);h.addEventListener('pointerup',up);h.addEventListener('pointercancel',up)}
+[1,2].forEach(n=>{const h=$('#rz'+n);
+ h.addEventListener('pointerdown',e=>startDrag(n,e));
+ h.addEventListener('dblclick',()=>{if(n===1)W1=DEF.w1;else W2=DEF.w2;applyW(true)});
+ h.addEventListener('keydown',e=>{const d=e.key==='ArrowLeft'?-16:e.key==='ArrowRight'?16:0;if(!d&&e.key!=='Home')return;e.preventDefault();e.stopPropagation();
+  if(e.key==='Home'){if(n===1)W1=DEF.w1;else W2=DEF.w2}else if(n===1)W1+=d;else W2+=d;applyW(true)})});
+addEventListener('resize',()=>applyW(false));
+applyW(false);
 
 /* speech */
 let tts=null,playingBtn=null;
@@ -406,6 +472,27 @@ function readingLine(w,c,a){
  if(!a)return esc(w[1]);
  return a.map(p=>p.s!=null?`<span class="okr">${esc(kata2hira(p.s))}</span>`:p.c===c&&p.type!=='?'?`<mark class="${p.type}">${esc(p.v)}</mark>`:esc(p.v)).join('')}
 const PER=10;
+const CHEV='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>';
+const CHECK='<svg class="ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>';
+function dd(id,label,val,head,opts,cls=''){const cur=opts.find(o=>o[0]===val)||opts[0];
+ return `<div class="dd ${cls}" data-dd="${id}"><button class="ddb" aria-haspopup="listbox" aria-expanded="false" aria-label="${esc(label)}: ${esc(cur[1])}"><span class="dk">${esc(label)}</span><span class="dv">${esc(cur[1])}</span>${CHEV}</button>
+ <div class="ddm" role="listbox" aria-label="${esc(head)}"><h4>${esc(head)}</h4>${opts.map(o=>`<button class="ddo" role="option" data-ddv="${esc(o[0])}" aria-selected="${o[0]===val}" tabindex="-1">${CHECK}<span>${esc(o[1])}</span><small>${esc(o[2])}</small></button>`).join('')}</div></div>`}
+function closeDD(focusBtn){const o=document.querySelector('.dd.open');if(!o)return;o.classList.remove('open');const b=o.querySelector('.ddb');b.setAttribute('aria-expanded','false');if(focusBtn)b.focus()}
+function openDD(d){closeDD();d.classList.add('open');d.querySelector('.ddb').setAttribute('aria-expanded','true');(d.querySelector('.ddo[aria-selected=true]')||d.querySelector('.ddo')).focus()}
+function setOpt(id,v){const keep=()=>{const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc};
+ if(id==='maxLv'){st.maxLv=+v;st.page=0;store.set('maxLv',st.maxLv)}
+ if(id==='sortBy'){st.sort=v;st.page=0;store.set('sort',st.sort)}
+ if(id==='rmode'){st.rmode=v;store.set('rmode',st.rmode);revealed.clear()}
+ keep();const b=document.querySelector(`[data-dd="${id}"] .ddb`);if(b)b.focus()}
+document.addEventListener('keydown',e=>{const d=e.target.closest&&e.target.closest('.dd');if(!d)return;
+ const items=[...d.querySelectorAll('.ddo')],i=items.indexOf(document.activeElement);
+ if(e.target.classList.contains('ddb')&&(e.key==='ArrowDown'||e.key==='ArrowUp')){e.preventDefault();e.stopImmediatePropagation();openDD(d);return}
+ if(!d.classList.contains('open'))return;
+ if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();closeDD(true)}
+ else if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();e.stopImmediatePropagation();const n=items[(i+(e.key==='ArrowDown'?1:-1)+items.length)%items.length];n&&n.focus()}
+ else if(e.key==='Home'||e.key==='End'){e.preventDefault();e.stopImmediatePropagation();items[e.key==='Home'?0:items.length-1].focus()}
+ else if(e.key==='Tab'){closeDD(false)}
+ else if(e.key==='ArrowLeft'||e.key==='ArrowRight'){e.stopImmediatePropagation()}},true);
 function freqMeter(w){const z=w[4]||0;const b=z>=5?5:z>=4.3?4:z>=3.6?3:z>=2.9?2:z>0?1:0;
  const lab=['No frequency data','Rare','Uncommon','Fairly common','Common','Very common'][b];
  const tip=w[5]===1?`Corpus frequency ${z.toFixed(1)} on the Zipf scale (wordfreq)`:w[5]===2?`Estimated ${z.toFixed(1)} from JMdict’s newspaper ranking`:'Not found in the frequency sources';
@@ -452,16 +539,16 @@ function entry(){
     <dt>Kun’yomi</dt><dd>${kun.length?kun.map(r=>chip(r,'kun',kunHtml(r),clean(r))).join(''):'<span style="color:var(--mute)">None</span>'}</dd>${cnt.irr?`<dt>Other</dt><dd>${chip('irr','irr','Special readings','')}</dd>`:''}</dl>
    ${usage}
   </div>
-  <div class="eact"><button class="btn ${known.has(c)?'learned':''}" id="known" aria-pressed="${known.has(c)}">${known.has(c)?'Learned':'Mark as learned'}</button><button class="btn" id="sayk">${SPK} Play readings</button></div>
+  <div class="eact"><button class="btn ${known.has(c)?'learned':'pri'}" id="known" aria-pressed="${known.has(c)}">${known.has(c)?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Learned':'Mark as learned'}</button><button class="btn" id="sayk">${SPK} Play readings</button></div>
  </header>
  <div class="wbar">
   <h3>Words with ${esc(c)} <small>${all.length} words</small>${st.rf?`<button class="clr" data-rf="${esc(st.rf)}">${st.rf==='irr'?'Special readings':'Read as '+esc(clean(st.rf))} ✕</button>`:''}</h3>
   <div class="ctrls">
    <div class="seg" role="group" aria-label="Word type">${[['comp','Compounds'],['single','With kana'],['all','All words']].map(([v,t])=>`<button data-mode="${v}" aria-pressed="${st.mode===v}">${t}</button>`).join('')}</div>
-   <select id="maxLv" aria-label="Kanji allowed in words">${LV.slice().reverse().map(n=>`<option value="${n}" ${st.maxLv===n?'selected':''}>${n===1?'Kanji from any level':'Kanji from N5'+(n<5?' to N'+n:'')+' only'}</option>`).join('')}</select>
-   <select id="rmode" aria-label="Reading display"><option value="ruby" ${st.rmode==='ruby'?'selected':''}>Furigana above</option><option value="line" ${st.rmode==='line'?'selected':''}>Reading beside</option><option value="hide" ${st.rmode==='hide'?'selected':''}>Hide readings</option></select>
-   <select id="sortBy" aria-label="Order"><option value="freq" ${st.sort==='freq'?'selected':''}>Most common first</option><option value="level" ${st.sort==='level'?'selected':''}>Easiest JLPT level first</option></select>
-   <label class="chk"><input type="checkbox" id="jlptOnly" ${st.jlptOnly?'checked':''}> JLPT words only</label>
+   ${dd('maxLv','Kanji',st.maxLv,'Words may only contain kanji from',[[1,'Any level','All JLPT kanji, N5 to N1'],[2,'N5–N2','Leaves out N1 kanji'],[3,'N5–N3','Leaves out N2 and N1 kanji'],[4,'N5–N4','Only beginner kanji'],[5,'N5 only','Only the first 79 kanji']])}
+   ${dd('rmode','Reading',st.rmode,'Show readings',[['ruby','Furigana','Above each kanji'],['line','Beside','Next to the word, larger'],['hide','Hidden','Tap to reveal, for self-testing']])}
+   ${dd('sortBy','Sort',st.sort,'Order words by',[['freq','Most common','How often the word is used'],['level','Easiest level','N5 words first, then most common']],'r')}
+   <button class="tgl" id="jlptOnly" aria-pressed="${st.jlptOnly}"><i></i>JLPT words only</button>
   </div>
  </div>
  ${all.length?`<ul class="words">${show.map((w,i)=>wordRow(w,c,from+i+1)).join('')}</ul>${pager(pages,all.length,from,show.length)}`:`<p class="empty" style="padding:28px clamp(20px,3vw,44px)">No words match these filters. Choose “All words” or allow kanji from more levels.</p>`}
@@ -501,6 +588,9 @@ function fcAct(a){const el=$('#card');
 
 /* events */
 document.addEventListener('click',e=>{
+ const ddo=e.target.closest('.ddo');if(ddo){const id=ddo.closest('.dd').dataset.dd;closeDD(false);setOpt(id,ddo.dataset.ddv);return}
+ const ddb=e.target.closest('.ddb');if(ddb){const d=ddb.closest('.dd');d.classList.contains('open')?closeDD(false):openDD(d);return}
+ if(!e.target.closest('.dd'))closeDD(false);
  const fc=e.target.closest('[data-fc]');if(fc){fcAct(fc.dataset.fc);return}
  if(e.target.id==='fc'){fcAct('close');return}
  const rf=e.target.closest('[data-rf]');if(rf){st.rf=st.rf===rf.dataset.rf?null:rf.dataset.rf;st.page=0;if(rf.dataset.say&&st.rf)say(rf.dataset.say,null);const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return}
@@ -516,13 +606,10 @@ document.addEventListener('click',e=>{
  if(id==='replay')animate();
  if(id==='back'){document.body.classList.remove('detail');grid();scrollTo({top:0})}
  if(id==='sayk'){const k=KM.get(st.cur);say([...k[5],...k[6].map(clean)].join('、'),e.target.closest('button'))}
+ if(id==='jlptOnly'){st.jlptOnly=!st.jlptOnly;st.page=0;store.set('jlptOnly',st.jlptOnly);const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;$('#jlptOnly')?.focus()}
  if(id==='known'){const c=st.cur;known.has(c)?known.delete(c):known.add(c);store.set('known',[...known]);levels();grid();const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc}
 });
 document.addEventListener('change',e=>{const id=e.target.id;const keep=()=>{const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc};
- if(id==='maxLv'){st.maxLv=+e.target.value;st.page=0;store.set('maxLv',st.maxLv);keep()}
- if(id==='sortBy'){st.sort=e.target.value;st.page=0;store.set('sort',st.sort);keep()}
- if(id==='rmode'){st.rmode=e.target.value;store.set('rmode',st.rmode);revealed.clear();keep()}
- if(id==='jlptOnly'){st.jlptOnly=e.target.checked;st.page=0;store.set('jlptOnly',st.jlptOnly);keep()}
  if(e.target===hideKnown){store.set('hideKnown',hideKnown.checked);grid()}
  if(e.target===byStroke){store.set('byStroke',byStroke.checked);grid()}});
 let qt;$('#q').addEventListener('input',e=>{clearTimeout(qt);qt=setTimeout(()=>{st.q=e.target.value.trim();levels();grid();

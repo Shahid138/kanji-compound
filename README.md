@@ -10,6 +10,7 @@ A study app for JLPT kanji (N5 to N1). Pick a level, open a kanji, and see its r
 - Furigana split per kanji, with the studied kanji's reading highlighted
 - Filter words by reading, word type and the highest level of kanji they contain
 - Animated stroke order
+- Resizable three-pane layout (drag the dividers; double-click to reset)
 - Flashcards, learned progress (saved in your browser), zoom, keyboard shortcuts
 - Audio uses your device's Japanese voice
 

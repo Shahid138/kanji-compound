@@ -238,6 +238,121 @@ mark.on{background:var(--onbg);color:var(--on)}mark.kun{background:var(--kunbg);
 .toast.show{opacity:1}
 .back{display:none}
 
+/* ---------- study nav ---------- */
+.navs{display:flex;flex-direction:column;gap:2px}
+.nav{display:flex;align-items:center;gap:10px;border:0;background:none;text-align:left;padding:8px 8px;border-radius:7px;min-height:40px;font-size:14px;font-weight:500;color:var(--ink)}
+.nav:hover{background:var(--line2)}
+.nav[aria-current=true]{background:var(--selbg)}
+.nav svg{color:var(--mute);flex:none}
+.nav .badge{margin-left:auto;background:var(--ink);color:var(--raise);font-size:11.5px;font-weight:700;border-radius:10px;padding:1px 8px;font-variant-numeric:tabular-nums}
+.nav kbd{margin-left:auto;font:500 11px var(--sans);color:var(--mute);border:1px solid var(--line);border-radius:4px;padding:0 5px}
+.nav .badge+kbd{margin-left:6px}
+/* ---------- modal additions ---------- */
+.chr{display:flex;align-items:center;gap:10px}
+.newtag{font-size:12px;font-weight:600;color:var(--kun);background:var(--kunbg);border-radius:5px;padding:2px 8px}
+.score{font-size:12.5px;color:var(--ink2)}
+.card kbd{font:500 11px var(--sans);opacity:.7;border:1px solid currentColor;border-radius:4px;padding:0 5px;margin-left:4px}
+.face.start{gap:16px}
+.lead{margin:0;color:var(--ink2);font-size:14.5px;line-height:1.55}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.kpis>div{background:var(--pane);border:1px solid var(--line2);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.kpis b{font-size:28px;line-height:1.1;font-variant-numeric:tabular-nums}.kpis b small{font-size:15px;color:var(--mute);font-weight:500}
+.kpis span{font-size:12.5px;color:var(--mute)}
+.gbar{display:block;height:4px;border-radius:2px;background:var(--line);margin-top:6px;overflow:hidden}.gbar i{display:block;height:100%;background:var(--ok)}
+.grades{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.gr{flex-direction:column;gap:1px;min-height:58px;padding:6px 8px}
+.gr small{font-size:11.5px;font-weight:500;color:var(--mute)}.gr kbd{display:none}
+.gr.g1 b{color:var(--l1,#e5484d)}.gr.g1 b{color:light-dark(#c4322f,#ff7a72)}.gr.g3 b{color:var(--ok)}
+.qset{display:flex;flex-direction:column;gap:6px}.qset>span{font-size:12.5px;color:var(--mute)}
+.qset .seg{flex-wrap:wrap;align-self:flex-start}
+.qp{margin:0;text-align:center;color:var(--ink2);font-size:14.5px}
+.qw{font:700 clamp(54px,9vw,84px)/1.15 var(--mincho);text-align:center;padding:6px 0 4px}
+.tgt{color:var(--sel);text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:8px}
+.qp .tgt{font-family:var(--mincho);font-weight:700;font-size:18px;text-underline-offset:4px;text-decoration-thickness:2px}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.qo{display:flex;align-items:center;gap:10px;text-align:left;border:1px solid var(--btnline);background:var(--btn);border-radius:9px;padding:12px 14px;font-size:14.5px;min-height:54px}
+.qo:hover:not(:disabled){background:var(--btnh)}
+.qo kbd{margin:0;flex:none}
+.qopts.kana .qo span{font:500 21px var(--sans)}
+.qo.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 16%,var(--raise))}
+.qo.wrong{border-color:light-dark(#c4322f,#ff7a72);background:color-mix(in srgb,light-dark(#c4322f,#ff7a72) 14%,var(--raise))}
+.qo:disabled{cursor:default}
+.qtype{display:flex;gap:8px}
+.qtype input{flex:1;min-height:52px;border-radius:9px;border:1px solid var(--btnline);background:var(--pane);font:500 22px var(--sans);padding:0 14px;text-align:center;outline:none}
+.qtype input:focus{border-color:var(--ink2)}
+.qtype input.right{border-color:var(--ok)}.qtype input.wrong{border-color:light-dark(#c4322f,#ff7a72)}
+.fb{border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:10px;font-size:14.5px}
+.fb.ok{background:color-mix(in srgb,var(--ok) 13%,var(--raise))}.fb.no{background:color-mix(in srgb,light-dark(#c4322f,#ff7a72) 11%,var(--raise))}
+.fb .row{justify-content:space-between}
+.fb .rl{font:500 18px var(--sans)}
+h4.sub{margin:4px 0 0;font-size:13px;color:var(--mute);font-weight:500}
+/* ---------- parts band ---------- */
+.band2{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;padding:20px clamp(20px,3vw,44px);border-bottom:1px solid var(--line)}
+.band2 h3,.pvs h3{margin:0 0 10px;font-size:14px;font-weight:600}
+.parts{display:flex;flex-wrap:wrap;gap:8px}
+.part{display:flex;align-items:center;gap:10px;border:1px solid var(--btnline);background:var(--btn);border-radius:9px;padding:6px 12px 6px 8px;text-align:left;min-height:52px}
+.part:hover{background:var(--btnh)}
+.part[aria-pressed=true]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.part .ps{font:600 28px/1 var(--mincho);width:34px;text-align:center}
+.part .pn{display:flex;flex-direction:column;font-size:13px;line-height:1.3}.part .pn small{color:var(--mute);font-size:12px}
+.withp p,.sub2{margin:10px 0 8px;font-size:12.5px;color:var(--mute)}
+.kchips{display:flex;flex-wrap:wrap;gap:4px}
+.kchips button{border:1px solid transparent;background:none;border-radius:7px;padding:3px 6px;display:flex;flex-direction:column;align-items:center;min-width:42px}
+.kchips button:hover{background:var(--line2);border-color:var(--line)}
+.kchips span{font:500 22px/1.2 var(--mincho)}.kchips small{font-size:10px;color:var(--mute)}
+.more2{font-size:12.5px;color:var(--mute);align-self:center;padding:0 6px}
+.sims,.nextk{display:flex;flex-wrap:wrap;gap:8px}
+.simk{display:flex;flex-direction:column;align-items:center;gap:1px;border:1px solid var(--btnline);background:var(--btn);border-radius:9px;padding:8px 6px 6px;min-width:76px}
+.simk:hover{background:var(--btnh)}
+.simk .mc{font:600 30px/1.1 var(--mincho)}.simk span:not(.mc){font-size:11.5px;color:var(--ink2);max-width:80px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.simk small{font-size:10.5px;color:var(--mute)}
+/* ---------- word rows clickable ---------- */
+.wr[data-w]{cursor:pointer;border-radius:8px}
+.wr[data-w]:hover{background:var(--line2);box-shadow:-10px 0 0 var(--line2),10px 0 0 var(--line2)}
+/* ---------- word view + progress ---------- */
+.wv,.pv{padding:24px clamp(20px,3vw,44px) 40px;display:flex;flex-direction:column;gap:26px}
+.crumb{min-height:20px}
+.wvh{display:grid;grid-template-columns:auto minmax(0,1fr);gap:30px;align-items:end}
+.wbig{font:700 clamp(56px,7vw,92px)/1.2 var(--mincho)}
+.wbig a{color:inherit;text-decoration:none;cursor:pointer}.wbig a:hover{color:var(--sel)}
+.wbig rt{font:600 16px/1.2 var(--sans);padding-bottom:4px}
+.wbig rt.on{color:var(--on)}.wbig rt.kun{color:var(--kun)}.wbig rt.hl:not(.on):not(.kun){color:var(--mute)}
+.wmeta{display:flex;flex-direction:column;gap:10px;padding-bottom:8px}
+.wrd{display:flex;align-items:center;gap:6px}.wrd .rl{font:500 24px var(--sans);color:var(--ink2)}
+.senses{margin:0;padding-left:20px;font-size:16px;color:var(--ink);display:flex;flex-direction:column;gap:2px}
+.fq.inl{flex-direction:row;align-items:center;gap:8px}
+.kin{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.kcard{display:flex;gap:14px;align-items:center;text-align:left;border:1px solid var(--btnline);background:var(--btn);border-radius:10px;padding:12px 14px}
+.kcard:hover{background:var(--btnh)}
+.kc{font:700 46px/1 var(--mincho)}
+.kt{display:flex;flex-direction:column;gap:3px;font-size:12.5px;color:var(--mute)}.kt b{font-size:14.5px;color:var(--ink)}
+.mini{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px 16px}
+.mini button{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 12px;text-align:left;border:0;background:none;border-radius:7px;padding:7px 8px}
+.mini button:hover{background:var(--line2)}
+.mini .mc{font:600 21px/1.3 var(--mincho);grid-row:span 2}.mini .r{font-size:14px;color:var(--ink2)}.mini .m{font-size:12.5px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pvh h2{margin:0;font-size:26px}.pvh p{margin:4px 0 0;color:var(--mute);font-size:13.5px}
+.kpis.big b{font-size:34px}
+.pv .row{display:flex;gap:10px;flex-wrap:wrap}.row.left{justify-content:flex-start}
+.fig{position:relative;height:180px}
+.fig svg{position:absolute;inset:0}
+.bc{fill:var(--ink2)}.bq{fill:var(--on);opacity:.8}.gl2{stroke:var(--ok);stroke-dasharray:4 4;stroke-width:1.2}.ax{font:11px var(--sans);fill:var(--mute)}
+.legend2{display:flex;gap:16px;flex-wrap:wrap;font-size:12.5px;color:var(--mute);margin-top:8px}
+.legend2 i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+.lc{background:var(--ink2)}.lq{background:var(--on)}.lg{background:var(--ok)}.lk{background:var(--ok)}.lr{background:var(--kun)}.ln{background:var(--line)}
+.lvt{display:flex;flex-direction:column;gap:10px}
+.lvr{display:grid;grid-template-columns:36px minmax(0,1fr) minmax(0,300px);gap:14px;align-items:center;font-size:13px;color:var(--mute)}
+.lvr b{color:var(--ink);font-size:14px}
+.sb{display:flex;height:10px;border-radius:5px;overflow:hidden;background:var(--line);gap:2px}
+.sb i{display:block;min-width:0}.sb .k{background:var(--ok)}.sb .r{background:var(--kun)}.sb .n{background:var(--line)}
+.pvs .qset{margin-bottom:12px}
+@container entry (max-width:860px){.band2{grid-template-columns:minmax(0,1fr)}.wvh{grid-template-columns:minmax(0,1fr);gap:10px}.lvr{grid-template-columns:36px minmax(0,1fr)}.lvr span{grid-column:2}}
+@media(max-width:1180px){.navs{flex-direction:row}.nav{padding:6px 10px}.nav kbd{display:none}}
+@media(max-width:760px){.qopts{grid-template-columns:1fr}}
+
+.wres{grid-column:1/-1;margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+.wres h4{margin:0 6px 6px;font-size:12.5px;font-weight:600;color:var(--mute)}
+.wres button{width:100%;display:grid;grid-template-columns:auto minmax(0,1fr);gap:0 10px;text-align:left;border:0;background:none;border-radius:7px;padding:6px 8px}
+.wres button:hover{background:var(--line2)}
+.wres .mc{font:600 20px/1.3 var(--mincho);grid-row:span 2}.wres .r{font-size:13px;color:var(--ink2)}.wres .m{font-size:12px;color:var(--mute);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 /* ---------- pane-width layouts (the panes can be resized) ---------- */
 @container entry (max-width:860px){
  .ehead{grid-template-columns:auto minmax(0,1fr);gap:22px}
@@ -289,15 +404,19 @@ mark.on{background:var(--onbg);color:var(--on)}mark.kun{background:var(--kunbg);
  <aside class="side">
   <div class="brand"><span class="mk">漢</span><span><b>JLPT Kanji</b><small>Kanji and compounds</small></span></div>
   <div class="grp"><h3>Level</h3><div class="lvls" id="levels" role="group" aria-label="JLPT level"></div></div>
+  <div class="grp"><h3>Study</h3><div class="navs">
+   <button class="nav" id="nav-review"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="5" width="13" height="15" rx="2"/><path d="M8 2h10a2 2 0 0 1 2 2v13"/></svg>Review<span class="badge" id="dueBadge" hidden>0</span><kbd>R</kbd></button>
+   <button class="nav" id="nav-quiz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14"/><path d="M12 17.5h.01"/></svg>Quiz<kbd>Q</kbd></button>
+   <button class="nav" id="nav-progress"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Progress</button>
+  </div></div>
   <div class="grp opts"><h3>Index</h3>
    <label class="tog">Hide learned<input type="checkbox" id="hideKnown"></label>
    <label class="tog">Sort by strokes<input type="checkbox" id="byStroke"></label>
   </div>
   <div class="foot">
-   <button class="sbtn pri" id="practice">Practise flashcards <kbd>P</kbd></button>
    <div class="zoom" role="group" aria-label="Text size"><button id="zout" aria-label="Smaller" title="Ctrl −">A−</button><output id="zval">100%</output><button id="zin" aria-label="Larger" title="Ctrl +">A+</button></div>
    <button class="sbtn" id="install" hidden>Install as app</button>
-   <p class="credit">Words from JMdict (EDRDG, CC BY-SA) and JLPT vocabulary lists. Levels follow Jonathan Waller’s lists. Stroke order from KanjiVG. Word frequency from wordfreq (Wikipedia, subtitles, news, books and web text) and JMdict’s newspaper ranking.</p>
+   <p class="credit">Words from JMdict (EDRDG, CC BY-SA) and JLPT vocabulary lists. Levels follow Jonathan Waller’s lists. Stroke order from KanjiVG. Parts from KRADFILE (EDRDG) and Kanji alive; look-alikes from Lars Yencken’s kanji confusion data. Word frequency from wordfreq (Wikipedia, subtitles, news, books and web text) and JMdict’s newspaper ranking.</p>
   </div>
  </aside>
  <section class="index" aria-label="Kanji index">
@@ -312,8 +431,9 @@ mark.on{background:var(--onbg);color:var(--on)}mark.kun{background:var(--kunbg);
  <div class="rz" id="rz2" role="separator" aria-orientation="vertical" aria-label="Resize kanji index" tabindex="0" title="Drag to resize · double-click to reset"></div>
  <main class="entry" id="entry" aria-live="polite"><div class="empty">Loading the kanji lists…</div></main>
 </div>
-<div class="fc" id="fc" role="dialog" aria-modal="true" aria-label="Flashcards"><div class="card" id="card"></div></div>
+<div class="fc" id="fc" role="dialog" aria-modal="true" aria-label="Study"><div class="card" id="card"></div></div>
 <div class="toast" id="toast" role="status"></div>
+<script src="wanakana.min.js"></script>
 <script>
 {
 const $=s=>document.querySelector(s);
@@ -321,8 +441,8 @@ const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'
 const store={get(k,d){try{const v=localStorage.getItem('jlptk.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('jlptk.'+k,JSON.stringify(v))}catch(e){}}};
 const LV=[5,4,3,2,1];
 const SPK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a8 8 0 0 1 0 11"/></svg>';
-let K=[],KM=new Map(),W=[],IDX=new Map(),ST=null;
-let st={level:store.get('level',5),cur:store.get('cur',null),q:'',mode:store.get('mode','comp'),maxLv:store.get('maxLv',1),jlptOnly:store.get('jlptOnly',false),rmode:store.get('rmode','ruby'),sort:store.get('sort','freq'),page:0,rf:null};
+let K=[],KM=new Map(),W=[],WI=new Map(),IDX=new Map(),ST=null;
+let st={view:'kanji',part:null,word:null,level:store.get('level',5),cur:store.get('cur',null),q:'',mode:store.get('mode','comp'),maxLv:store.get('maxLv',1),jlptOnly:store.get('jlptOnly',false),rmode:store.get('rmode','ruby'),sort:store.get('sort','freq'),page:0,rf:null};
 let known=new Set(store.get('known',[])),revealed=new Set();
 const hideKnown=$('#hideKnown'),byStroke=$('#byStroke');
 hideKnown.checked=store.get('hideKnown',false);byStroke.checked=store.get('byStroke',false);
@@ -435,17 +555,18 @@ function levels(){
   return `<button class="lv" data-lv="${n}" aria-pressed="${!st.q&&st.level===n}"><span class="n">N${n}</span><span class="m"><i style="width:${L.length?100*kn/L.length:0}%"></i></span><span class="c">${kn}/${L.length}</span></button>`}).join('')}
 function list(){
  let L;
- if(st.q){const q=st.q.trim().toLowerCase(),qh=kata2hira(q);const chars=[...st.q].filter(isK);
-  L=chars.length?[...new Set(chars)].map(c=>KM.get(c)):K.filter(k=>k[4].some(m=>m.toLowerCase().includes(q))||[...k[5],...k[6]].some(r=>kata2hira(clean(r)).startsWith(qh)));
+ if(st.q){const q=st.q.trim().toLowerCase(),kana=kanaOf(st.q.trim());const chars=[...st.q].filter(isK);
+  const mre=/^[a-z' -]+$/.test(q)?new RegExp('\\b'+q.replace(/[^a-z' -]/g,'')):null;
+  L=chars.length?[...new Set(chars)].map(c=>KM.get(c)):K.filter(k=>(mre&&k[4].some(m=>mre.test(m.toLowerCase())))||(kana&&[...k[5],...k[6]].some(r=>kata2hira(clean(r)).startsWith(kana))));
  } else L=K.filter(k=>k[1]===st.level);
  if(hideKnown.checked)L=L.filter(k=>!known.has(k[0]));
  if(byStroke.checked)L=[...L].sort((a,b)=>a[2]-b[2]);
  return L}
 function grid(){
- const L=list();
- if(st.q){$('#gtitle').textContent=`${L.length} result${L.length===1?'':'s'}`;$('#ptext').textContent='All levels'}
+ const L=list(),ws=st.q?wordSearch(st.q.trim()):[];
+ if(st.q){$('#gtitle').textContent=`${L.length} kanji${ws.length?`, ${ws.length}${ws.length>=40?'+':''} word${ws.length===1?'':'s'}`:''}`;$('#ptext').textContent='All levels'}
  else{const base=K.filter(k=>k[1]===st.level),kn=base.filter(k=>known.has(k[0])).length;$('#gtitle').textContent=`N${st.level} kanji`;$('#ptext').textContent=`${kn} of ${base.length} learned`}
- $('#kgrid').innerHTML=L.length?L.map(k=>`<button class="k${known.has(k[0])?' known':''}" data-k="${esc(k[0])}" aria-current="${k[0]===st.cur}" aria-label="${esc(k[0])} ${esc(k[4][0]||'')}">${st.q?`<span class="lt">N${k[1]}</span>`:''}<span class="g" lang="ja">${esc(k[0])}</span><span class="w">${esc((k[4][0]||'').toLowerCase())}</span></button>`).join(''):`<div class="empty">${hideKnown.checked&&!st.q?'You’ve learned every kanji in this level. Turn off “Hide learned” to review them.':'No JLPT kanji match that search. Try a meaning in English or a reading in kana.'}</div>`}
+ $('#kgrid').innerHTML=L.length?L.map(k=>`<button class="k${known.has(k[0])?' known':''}" data-k="${esc(k[0])}" aria-current="${k[0]===st.cur}" aria-label="${esc(k[0])} ${esc(k[4][0]||'')}">${st.q?`<span class="lt">N${k[1]}</span>`:''}<span class="g" lang="ja">${esc(k[0])}</span><span class="w">${esc((k[4][0]||'').toLowerCase())}</span></button>`).join('')+(ws.length?`<div class="wres"><h4>Words</h4>${ws.map(w=>`<button data-w="${esc(w[0])}"><span class="mc" lang="ja">${esc(w[0])}</span><span class="r" lang="ja">${esc(w[1])}</span><span class="m">${esc(gloss(w))}</span></button>`).join('')}</div>`:''):ws.length?`<div class="wres"><h4>Words</h4>${ws.map(w=>`<button data-w="${esc(w[0])}"><span class="mc" lang="ja">${esc(w[0])}</span><span class="r" lang="ja">${esc(w[1])}</span><span class="m">${esc(gloss(w))}</span></button>`).join('')}</div>`:`<div class="empty">${hideKnown.checked&&!st.q?'You’ve learned every kanji in this level. Turn off “Hide learned” to review them.':'No JLPT kanji match that search. Try a meaning in English or a reading in kana.'}</div>`}
 
 /* entry */
 function wordsFor(c,o=st){
@@ -512,11 +633,12 @@ function wordRow(w,c,n){
  const line=`<span class="rl">${readingLine(w,c,a)}</span>`;
  const hid=st.rmode==='hide'&&!revealed.has(w[0]);
  const top=st.rmode==='ruby'?tag.replace('class="use','style="margin-left:0" class="use'):hid?`<button class="reveal" data-rev="${esc(w[0])}" data-r="${esc(w[1])}">Show reading</button><span hidden>${line}${tag}</span>`:line+tag;
- return `<li class="wr"><span class="rk">${n}</span><span class="wd" lang="ja">${wd}</span>
+ return `<li class="wr" data-w="${esc(w[0])}" title="Open word details"><span class="rk">${n}</span><span class="wd" lang="ja">${wd}</span>
   <span class="info"><span>${top}</span><div class="mn">${esc(w[2])}</div></span>
   <span class="fq">${freqMeter(w)}<span class="lvl">${w[3]?'N'+w[3]+' vocabulary':''}</span></span>
   <button class="play" data-say="${esc(w[1])}" aria-label="Play ${esc(w[1])}" title="Listen">${SPK}</button></li>`}
 function entry(){
+ if(st.view==='word')return wordView();if(st.view==='progress')return progressView();
  const el=$('#entry');const k=KM.get(st.cur);
  if(!k){el.innerHTML=`<div class="empty">Choose a kanji from the index to see its readings and compounds.</div>`;return}
  const [c,lv,strokes,freq,mean,on,kun,grade]=k;
@@ -541,6 +663,7 @@ function entry(){
   </div>
   <div class="eact"><button class="btn ${known.has(c)?'learned':'pri'}" id="known" aria-pressed="${known.has(c)}">${known.has(c)?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Learned':'Mark as learned'}</button><button class="btn" id="sayk">${SPK} Play readings</button></div>
  </header>
+ ${partsBand(c)}
  <div class="wbar">
   <h3>Words with ${esc(c)} <small>${all.length} words</small>${st.rf?`<button class="clr" data-rf="${esc(st.rf)}">${st.rf==='irr'?'Special readings':'Read as '+esc(clean(st.rf))} ✕</button>`:''}</h3>
   <div class="ctrls">
@@ -554,55 +677,280 @@ function entry(){
  ${all.length?`<ul class="words">${show.map((w,i)=>wordRow(w,c,from+i+1)).join('')}</ul>${pager(pages,all.length,from,show.length)}`:`<p class="empty" style="padding:28px clamp(20px,3vw,44px)">No words match these filters. Choose “All words” or allow kanji from more levels.</p>`}
  <div style="height:24px"></div>`;
  requestAnimationFrame(animate)}
-function open(c){if(!isK(c))return;st.cur=c;st.rf=null;st.page=0;revealed.clear();store.set('cur',c);document.body.classList.add('detail');grid();entry();
+function open(c){if(!isK(c))return;st.view='kanji';st.part=null;st.cur=c;st.rf=null;st.page=0;revealed.clear();store.set('cur',c);document.body.classList.add('detail');grid();entry();
  if(narrow())scrollTo({top:0});else $('#entry').scrollTop=0;
  const b=document.querySelector(`.k[data-k="${CSS.escape(c)}"]`);if(b)b.scrollIntoView({block:'nearest'})}
 
-/* flashcards */
-let deck=[],di=0,again=0;
-function startPractice(){let L=list().filter(k=>!known.has(k[0]));if(!L.length)L=list();
+/* ================= study: spaced repetition, quiz, progress ================= */
+const DAY=()=>{const d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/86400000)};
+let srs=store.get('srs',{});           /* kanji -> [intervalDays, ease, dueDay, reps, lapses] */
+let act=store.get('act',{});           /* day -> [reviews, newLearned, quizQuestions, quizCorrect] */
+let cfg=Object.assign({newPerDay:10,goal:20},store.get('cfg',{}));
+const saveSrs=()=>store.set('srs',srs);
+function logAct(i,n=1){const d=DAY();const a=act[d]||(act[d]=[0,0,0,0]);a[i]+=n;store.set('act',act)}
+function dueList(){const t=DAY();return Object.keys(srs).filter(c=>srs[c][2]<=t&&KM.has(c)).sort((a,b)=>srs[a][2]-srs[b][2])}
+function newList(n){const t=DAY(),done=(act[t]||[0,0])[1],left=n??Math.max(0,cfg.newPerDay-done);
+ return K.filter(k=>k[1]===st.level&&!srs[k[0]]&&!known.has(k[0])).sort((a,b)=>(a[3]||9999)-(b[3]||9999)).slice(0,left).map(k=>k[0])}
+function nextIv(s,g){/* g: 1 again, 2 hard, 3 good, 4 easy */
+ const i=s?s[0]:0,e=s?s[1]:2.5;
+ if(g===1)return{i:0,e:Math.max(1.3,e-.2)};
+ if(!s||i===0)return{i:[0,0,1,2,4][g],e:g===4?e+.15:g===2?Math.max(1.3,e-.15):e};
+ if(g===2)return{i:Math.max(i+1,Math.round(i*1.2)),e:Math.max(1.3,e-.15)};
+ if(g===3)return{i:Math.max(i+1,Math.round(i*e)),e};
+ return{i:Math.max(i+2,Math.round(i*e*1.3)),e:e+.15}}
+const ivLabel=i=>i===0?'Again today':i<30?`${i} day${i>1?'s':''}`:i<365?`${Math.round(i/30)} mo`:`${(i/365).toFixed(1)} yr`;
+function updateBadge(){const b=$('#dueBadge');if(!b)return;const n=dueList().length+newList().length;b.textContent=n;b.hidden=!n}
+
+/* ---------- modal shell ---------- */
+let sess=null,qz=null;
+const modal=()=>$('#fc');
+function openModal(){modal().classList.add('open')}
+function closeModal(){modal().classList.remove('open');sess=null;qz=null;levels();grid();updateBadge();if(st.view==='progress'||st.view==='kanji'){const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc}}
+const mhead=(t,extra='')=>`<div class="ch"><span>${t}</span><span class="chr">${extra}<button class="btn" data-m="close">Close</button></span></div>`;
+
+/* ---------- review ---------- */
+function startReview(){
+ const due=dueList(),nw=newList();sess=null;qz=null;openModal();
+ const el=$('#card');el.className='card';
+ const next=Object.values(srs).map(s=>s[2]).filter(d=>d>DAY()).sort((a,b)=>a-b)[0];
+ el.innerHTML=`${mhead('Daily review')}
+ <div class="face start">
+  <div class="kpis"><div><b>${due.length}</b><span>due for review</span></div><div><b>${nw.length}</b><span>new N${st.level} kanji today</span></div></div>
+  <p class="lead">${due.length+nw.length?`Reviews first, then new kanji from N${st.level} in order of how common they are. Grade each card honestly: the app schedules it again just before you’d forget it.`:`Nothing is due${next?`. Your next review is in ${next-DAY()} day${next-DAY()>1?'s':''}`:''}. You can add more new kanji or practise this level without affecting the schedule.`}</p>
+  <div class="row">${due.length+nw.length?`<button class="btn pri" data-m="go">Start review</button>`:`<button class="btn pri" data-m="more">Learn ${Math.min(5,newList(5).length)} more new kanji</button>`}<button class="btn" data-m="cram">Practise N${st.level} without scheduling</button></div>
+  <p class="hint">New kanji per day: ${cfg.newPerDay}. Change it on the Progress page.</p>
+ </div>`;
+ sess={mode:'srs',queue:[...due,...nw],newSet:new Set(nw),i:0,total:due.length+nw.length,again:0,done:0}}
+function startCram(){let L=list().filter(k=>!known.has(k[0]));if(!L.length)L=list();
  if(!L.length){toast('There are no kanji in this list to practise.');return}
- deck=L.map(k=>k[0]).sort(()=>Math.random()-.5);di=0;again=0;$('#fc').classList.add('open');card()}
-function card(){
- const el=$('#card');
- if(di>=deck.length){el.className='card';el.innerHTML=`<div class="ch"><span>Session complete</span><button class="btn" data-fc="close">Close</button></div><div class="done"><div class="gl mc">完</div><p>${deck.length} cards reviewed. ${deck.length-again} marked learned, ${again} to review again.</p><div class="row"><button class="btn pri" data-fc="restart">Practise again</button></div></div>`;return}
- const k=KM.get(deck[di]);const ex=wordsFor(k[0],{mode:'all',maxLv:1,jlptOnly:false}).filter(w=>!/[〜～~]/.test(w[0])).slice(0,4);
+ openModal();sess={mode:'cram',queue:L.map(k=>k[0]).sort(()=>Math.random()-.5),newSet:new Set(),i:0,total:L.length,again:0,done:0};showCard()}
+function examples(c,n=4){return wordsFor(c,{mode:'all',maxLv:1,jlptOnly:false}).filter(w=>!/[〜～~]/.test(w[0])&&w[0]!==c).slice(0,n)}
+function showCard(){
+ const el=$('#card');if(!sess)return;
+ if(sess.i>=sess.queue.length){el.className='card';
+  el.innerHTML=`${mhead('Review complete')}<div class="done"><div class="gl mc">完</div><p>${sess.done} card${sess.done===1?'':'s'} reviewed${sess.again?`, ${sess.again} to see again soon`:''}.</p><div class="row"><button class="btn pri" data-m="close">Done</button>${sess.mode==='srs'?'<button class="btn" data-m="progress">See progress</button>':''}</div></div>`;return}
+ const c=sess.queue[sess.i],k=KM.get(c),s=srs[c],isNew=sess.newSet.has(c)&&!s;
+ const ex=examples(c);
+ const grades=sess.mode==='srs'?[1,2,3,4].map(g=>{const n=nextIv(s,g);return `<button class="btn gr g${g}" data-g="${g}"><b>${['','Again','Hard','Good','Easy'][g]}</b><small>${ivLabel(n.i)}</small><kbd>${g}</kbd></button>`}).join(''):
+  `<button class="btn gr g1" data-g="1"><b>Again</b><small>see it again</small><kbd>1</kbd></button><button class="btn gr g3" data-g="3"><b>I know this</b><small>mark learned</small><kbd>2</kbd></button>`;
  el.className='card';
- el.innerHTML=`<div class="ch"><span>Card ${di+1} of ${deck.length}, N${k[1]}</span><button class="btn" data-fc="close">Close</button></div>
- <div class="pbar"><i style="width:${100*di/deck.length}%"></i></div>
- <div class="face"><div class="gl" lang="ja">${esc(k[0])}</div>
-  <div class="row q"><button class="btn pri" data-fc="reveal">Show answer</button></div>
+ el.innerHTML=`${mhead(`${sess.mode==='srs'?'Review':'Practice'} · ${Math.min(sess.done+1,sess.total)} of ${sess.total}`,isNew?'<span class="newtag">New</span>':'')}
+ <div class="pbar"><i style="width:${100*sess.done/Math.max(1,sess.total)}%"></i></div>
+ <div class="face"><div class="gl" lang="ja">${esc(c)}</div>
+  <div class="row q"><button class="btn pri" data-m="reveal">Show answer <kbd>Space</kbd></button></div>
   <div class="ans"><h3>${esc(k[4].slice(0,3).join(', '))}</h3>
    <dl class="rd" lang="ja"><dt>On’yomi</dt><dd>${k[5].map(r=>`<button class="chip on" data-say="${esc(r)}">${esc(hira2kata(r))}</button>`).join('')||'None'}</dd><dt>Kun’yomi</dt><dd>${k[6].map(r=>`<button class="chip kun" data-say="${esc(clean(r))}">${kunHtml(r)}</button>`).join('')||'None'}</dd></dl>
-   <ul class="ex" lang="ja">${ex.map(w=>`<li><b>${esc(w[0])}</b><span class="r">${readingLine(w,k[0],align(w[0],w[1]))}</span><span class="m">${esc(w[2].split(';')[0])}</span></li>`).join('')}</ul>
-   <div class="row"><button class="btn" data-fc="again">Review again</button><button class="btn pri" data-fc="got">I know this</button></div></div></div>
- <div class="hint">Space shows the answer · 1 review again · 2 I know this · Esc closes</div>`}
-function fcAct(a){const el=$('#card');
- if(a==='close'){$('#fc').classList.remove('open');levels();grid();entry();return}
- if(a==='restart'){startPractice();return}
- if(a==='reveal'){el.classList.add('rev');el.querySelector('.q')?.remove();return}
- if(!el.classList.contains('rev'))return;
- if(a==='got'){known.add(deck[di]);store.set('known',[...known])}
- if(a==='again')again++;
- if(a==='got'||a==='again'){di++;card()}}
+   <ul class="ex" lang="ja">${ex.map(w=>`<li><b>${esc(w[0])}</b><span class="r">${readingLine(w,c,align(w[0],w[1]))}</span><span class="m">${esc(w[2].split(';')[0])}</span></li>`).join('')}</ul>
+   <div class="grades">${grades}</div></div></div>`}
+function grade(g){
+ if(!sess||!$('#card').classList.contains('rev'))return;
+ const c=sess.queue[sess.i];
+ if(sess.mode==='cram'){if(g>=3){known.add(c);store.set('known',[...known])}else{sess.again++;sess.queue.push(c);sess.total++}sess.i++;sess.done++;showCard();return}
+ const s=srs[c],n=nextIv(s,g),t=DAY(),wasNew=!s;
+ srs[c]=[n.i,+n.e.toFixed(2),t+n.i,(s?s[3]:0)+(g>1?1:0),(s?s[4]:0)+(g===1&&s&&s[0]>0?1:0)];
+ if(n.i>=21&&!known.has(c)){known.add(c);store.set('known',[...known])}
+ saveSrs();logAct(wasNew?1:0);
+ if(g===1){sess.again++;sess.queue.splice(Math.min(sess.queue.length,sess.i+4),0,c);sess.total++;sess.newSet.delete(c)}
+ sess.i++;sess.done++;showCard()}
+
+/* ---------- quiz ---------- */
+let qopt=Object.assign({type:'mix',len:10},store.get('qopt',{}));
+function quizPool(){
+ const lv=new Set(K.filter(k=>k[1]===st.level).map(k=>k[0])),seen=new Set(),pool=[];
+ for(const c of lv)for(const i of (IDX.get(c)||[])){const w=W[i];if(seen.has(w[0]))continue;seen.add(w[0]);
+  if(/[〜～~]/.test(w[0])||(w[4]||0)<3||[...w[0]].length<2)continue;const ks=[...w[0]].filter(isK);if(ks.length<2&&!w[3])continue;
+  if(!ks.every(x=>KM.get(x)[1]>=st.level))continue;pool.push(w)}
+ return pool.sort((a,b)=>b[4]-a[4]).slice(0,240)}
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const gloss=w=>w[2].split(';')[0].trim();
+function makeQ(w,type,pool){
+ const lv=st.level;
+ if(type==='kread'){const a=align(w[0],w[1]);const parts=a?a.filter(p=>p.c&&p.c!=='々'&&p.type!=='?'):[];
+  const pick=parts.filter(p=>KM.get(p.c)[1]===lv)[0]||parts[0];if(!pick)return null;
+  const k=KM.get(pick.c),opts=new Set([pick.v]);
+  const own=[...k[5].map(r=>kata2hira(r.replace(/-/g,''))),...k[6].map(r=>kata2hira(clean(r.split('.')[0])))].filter(Boolean);
+  for(const r of shuffle(own)){if(opts.size>=4)break;if(r!==pick.v)opts.add(r)}
+  for(const o of shuffle(pool)){if(opts.size>=4)break;const al=align(o[0],o[1]);const p=al&&al.find(x=>x.c&&x.type!=='?'&&x.c!==pick.c);if(p&&p.v!==pick.v)opts.add(p.v)}
+  if(opts.size<3)return null;return{type,w,c:pick.c,ans:pick.v,ptype:pick.type,opts:shuffle([...opts])}}
+ if(type==='mean'){const ans=gloss(w),opts=new Set([ans]);
+  for(const o of shuffle(pool)){if(opts.size>=4)break;const g=gloss(o);if(o[0]!==w[0]&&g.toLowerCase()!==ans.toLowerCase()&&!opts.has(g))opts.add(g)}
+  return{type,w,ans,opts:shuffle([...opts])}}
+ return{type:'typ',w,ans:kata2hira(w[1])}}
+function quizStart(){
+ sess=null;openModal();const el=$('#card');el.className='card';
+ const pool=quizPool();
+ const seg=(key,opts)=>`<div class="seg" role="group">${opts.map(([v,t])=>`<button data-qo="${key}:${v}" aria-pressed="${String(qopt[key])===String(v)}">${t}</button>`).join('')}</div>`;
+ el.innerHTML=`${mhead('Quiz')}
+ <div class="face start">
+  <p class="lead">Questions use common words built from N${st.level} kanji (and easier ones). ${pool.length} words available.</p>
+  <div class="qset"><span>Question type</span>${seg('type',[['mix','Mixed'],['typ','Type the reading'],['mean','Pick the meaning'],['kread','Pick the kanji’s reading']])}</div>
+  <div class="qset"><span>Length</span>${seg('len',[[10,'10'],[20,'20'],[30,'30']])}</div>
+  <div class="row"><button class="btn pri" data-m="qgo" ${pool.length<8?'disabled':''}>Start quiz <kbd>Enter</kbd></button></div>
+  ${pool.length<8?'<p class="hint">Not enough words at this level yet. Pick a higher level in the sidebar.</p>':''}
+ </div>`}
+function quizGo(retry){
+ const pool=quizPool();const types=['typ','mean','kread'];let src;
+ if(retry&&qz&&qz.wrong.length)src=qz.wrong.map(q=>q.w);else src=[...shuffle(pool.slice(0,Math.max(40,qopt.len*4))),...shuffle(pool.slice(Math.max(40,qopt.len*4)))];
+ const qs=[];for(const w of src){if(qs.length>=(retry?qz.wrong.length:qopt.len))break;const t=qopt.type==='mix'?types[qs.length%3]:qopt.type;const q=makeQ(w,t,pool)||(qopt.type==='mix'||retry?makeQ(w,'mean',pool):null);if(q)qs.push(q)}
+ qz={qs:shuffle(qs),i:0,right:0,wrong:[],answered:false};showQ()}
+function wordHtmlFor(q){const w=q.w;
+ if(q.type==='kread'){const a=align(w[0],w[1]);return a.map(p=>p.s!=null?esc(p.s):p.c===q.c?`<span class="tgt">${esc(p.c)}</span>`:esc(p.c)).join('')}
+ return esc(w[0])}
+function showQ(){
+ const el=$('#card');if(!qz)return;el.className='card';
+ if(qz.i>=qz.qs.length){const n=qz.qs.length,pct=Math.round(100*qz.right/Math.max(1,n));
+  el.innerHTML=`${mhead('Quiz results')}<div class="face start"><div class="kpis"><div><b>${qz.right}/${n}</b><span>correct</span></div><div><b>${pct}%</b><span>score</span></div></div>
+  ${qz.wrong.length?`<h4 class="sub">To review</h4><ul class="ex" lang="ja">${qz.wrong.map(q=>`<li><b>${esc(q.w[0])}</b><span class="r">${esc(q.w[1])}</span><span class="m">${esc(gloss(q.w))}</span></li>`).join('')}</ul>`:'<p class="lead">Every answer right.</p>'}
+  <div class="row">${qz.wrong.length?'<button class="btn pri" data-m="qretry">Retry mistakes</button>':''}<button class="btn ${qz.wrong.length?'':'pri'}" data-m="qnew">New quiz</button><button class="btn" data-m="close">Close</button></div></div>`;return}
+ const q=qz.qs[qz.i];qz.answered=false;
+ const prompt=q.type==='typ'?'Type the reading in romaji or kana':q.type==='mean'?'What does this word mean?':`How is <span class="tgt">${esc(q.c)}</span> read in this word?`;
+ el.innerHTML=`${mhead(`Question ${qz.i+1} of ${qz.qs.length}`,`<span class="score">${qz.right} right</span>`)}
+ <div class="pbar"><i style="width:${100*qz.i/qz.qs.length}%"></i></div>
+ <div class="face"><p class="qp">${prompt}</p><div class="qw mc" lang="ja">${wordHtmlFor(q)}</div>
+  ${q.type==='typ'?`<form class="qtype" data-qform><input id="qin" autocomplete="off" autocapitalize="off" spellcheck="false" lang="ja" placeholder="e.g. shokuji → しょくじ" aria-label="Reading"><button class="btn pri">Check <kbd>Enter</kbd></button></form>`:
+   `<div class="qopts ${q.type==='kread'?'kana':''}">${q.opts.map((o,i)=>`<button class="qo" data-qa="${i}"><kbd>${i+1}</kbd><span ${q.type==='kread'?'lang="ja"':''}>${esc(o)}</span></button>`).join('')}</div>`}
+  <div class="fb" id="qfb" hidden></div></div>`;
+ const inp=$('#qin');if(inp){try{if(window.wanakana)wanakana.bind(inp,{IMEMode:true})}catch(e){}inp.focus()}}
+function answer(val){
+ const q=qz.qs[qz.i];if(qz.answered)return;qz.answered=true;
+ let ok;if(q.type==='typ'){const v=kata2hira((window.wanakana?wanakana.toHiragana(val):val).trim());ok=v===q.ans}else ok=q.opts[val]===q.ans;
+ if(ok)qz.right++;else qz.wrong.push(q);logAct(2);if(ok)logAct(3);
+ if(q.type!=='typ')document.querySelectorAll('.qo').forEach((b,i)=>{b.disabled=true;if(q.opts[i]===q.ans)b.classList.add('right');else if(i===val)b.classList.add('wrong')});
+ else{const inp=$('#qin');inp.disabled=true;inp.classList.add(ok?'right':'wrong')}
+ const w=q.w,a=align(w[0],w[1]);
+ const fb=$('#qfb');fb.hidden=false;fb.className='fb '+(ok?'ok':'no');
+ fb.innerHTML=`<div><b>${ok?'Correct':'Not quite'}</b> <span class="rl" lang="ja">${q.type==='kread'?readingLine(w,q.c,a):esc(w[1])}</span> · ${esc(gloss(w))}${q.type==='kread'&&q.ptype?` <span class="use ${q.ptype}">${TY[q.ptype]}</span>`:''}</div>
+ <div class="row"><button class="play" data-say="${esc(w[1])}" aria-label="Listen">${SPK}</button><button class="btn pri" data-m="qnext" id="qnext">Next <kbd>Enter</kbd></button></div>`;
+ $('#qnext').focus()}
+
+/* ---------- modal events ---------- */
+function modalClick(e){
+ const m=e.target.closest('[data-m]');
+ if(m){const a=m.dataset.m;
+  if(a==='close')closeModal();else if(a==='go'){showCard()}else if(a==='more'){const nw=newList(5);sess={mode:'srs',queue:nw,newSet:new Set(nw),i:0,total:nw.length,again:0,done:0};showCard()}
+  else if(a==='cram')startCram();else if(a==='reveal'){$('#card').classList.add('rev');$('#card .q')?.remove();$('#card .gr')?.focus()}
+  else if(a==='progress'){closeModal();showProgress()}else if(a==='qgo')quizGo(false);else if(a==='qretry')quizGo(true);else if(a==='qnew')quizStart();
+  else if(a==='qnext'){qz.i++;showQ()}
+  return true}
+ const g=e.target.closest('[data-g]');if(g){grade(+g.dataset.g);return true}
+ const qo=e.target.closest('[data-qo]');if(qo){const [k,v]=qo.dataset.qo.split(':');qopt[k]=k==='len'?+v:v;store.set('qopt',qopt);quizStart();return true}
+ const qa=e.target.closest('[data-qa]');if(qa){answer(+qa.dataset.qa);return true}
+ return false}
+document.addEventListener('submit',e=>{if(e.target.matches('[data-qform]')){e.preventDefault();const v=$('#qin').value;if(v.trim())answer(v)}});
+function modalKey(e){
+ if(e.key==='Escape'){closeModal();return}
+ const card=$('#card');
+ if(qz){
+  if(e.target.id==='qin')return;
+  if(qz.i>=qz.qs.length)return;
+  if(e.key==='Enter'&&qz.answered){e.preventDefault();qz.i++;showQ();return}
+  if(/^[1-4]$/.test(e.key)&&!qz.answered&&qz.qs[qz.i].opts){e.preventDefault();const i=+e.key-1;if(i<qz.qs[qz.i].opts.length)answer(i)}
+  return}
+ if(!sess){if(e.key==='Enter'){const b=card.querySelector('[data-m="qgo"],[data-m="go"]');if(b&&!b.disabled){e.preventDefault();b.click()}}return}
+ if(sess.i>=sess.queue.length&&sess.queue.length)return;
+ if(!card.querySelector('.face .gl')){if(e.key==='Enter'){const b=card.querySelector('.btn.pri');if(b){e.preventDefault();b.click()}}return}
+ if(!card.classList.contains('rev')){if(e.key===' '||e.key==='Enter'){e.preventDefault();card.classList.add('rev');card.querySelector('.q')?.remove()}return}
+ if(sess.mode==='cram'){if(e.key==='1')grade(1);if(e.key==='2'||e.key===' '||e.key==='Enter'){e.preventDefault();grade(3)}return}
+ if(/^[1-4]$/.test(e.key))grade(+e.key);else if(e.key===' '||e.key==='Enter'){e.preventDefault();grade(3)}}
+
+/* ---------- progress view ---------- */
+function showProgress(){st.view='progress';document.body.classList.add('detail');entry();$('#entry').scrollTop=0;if(narrow())scrollTo({top:0})}
+function streak(){let d=DAY(),n=0;const has=x=>act[x]&&act[x].some(v=>v>0);if(!has(d))d--;while(has(d)){n++;d--}return n}
+function progressView(){
+ const el=$('#entry'),t=DAY(),today=act[t]||[0,0,0,0],did=today[0]+today[1];
+ const due=dueList().length,nw=newList().length,inRev=Object.keys(srs).filter(c=>!known.has(c)).length;
+ const days=[...Array(30)].map((_,i)=>t-29+i),vals=days.map(d=>{const a=act[d]||[0,0,0,0];return[a[0]+a[1],a[2]]});
+ const qq=days.reduce((s,d)=>s+((act[d]||[])[2]||0),0),qc=days.reduce((s,d)=>s+((act[d]||[])[3]||0),0);
+ const lvRows=LV.map(n=>{const L=K.filter(k=>k[1]===n),kn=L.filter(k=>known.has(k[0])).length,rv=L.filter(k=>srs[k[0]]&&!known.has(k[0])).length;return{n,t:L.length,kn,rv}});
+ const next=newList(8);
+ const seg=(key,opts)=>`<div class="seg" role="group">${opts.map(v=>`<button data-cfg="${key}:${v}" aria-pressed="${cfg[key]===v}">${v}</button>`).join('')}</div>`;
+ el.innerHTML=`<button class="btn back" id="back">Back to index</button>
+ <div class="pv">
+  <header class="pvh"><h2>Your progress</h2><p>Saved in this browser. Learned kanji: ${known.size} of ${K.length}.</p></header>
+  <div class="kpis big">
+   <div><b>${streak()}</b><span>day streak</span></div>
+   <div><b>${did}<small>/${cfg.goal}</small></b><span>cards today</span><i class="gbar"><i style="width:${Math.min(100,100*did/cfg.goal)}%"></i></i></div>
+   <div><b>${due+nw}</b><span>ready to review</span></div>
+   <div><b>${qq?Math.round(100*qc/qq)+'%':'–'}</b><span>quiz accuracy, 30 days${qq?` (${qq} questions)`:''}</span></div>
+  </div>
+  <div class="row left"><button class="btn pri" id="pv-review">Start review</button><button class="btn" id="pv-quiz">Take a quiz</button></div>
+  <section class="pvs"><h3>Last 30 days</h3><div class="fig" id="actfig" aria-label="Cards reviewed per day for the last 30 days"></div>
+   <div class="legend2"><span><i class="lc"></i>Cards reviewed</span><span><i class="lq"></i>Quiz questions</span><span><i class="lg"></i>Daily goal (${cfg.goal})</span></div></section>
+  <section class="pvs"><h3>By level</h3><div class="lvt">${lvRows.map(r=>`<div class="lvr"><b>N${r.n}</b><div class="sb">${[['k',r.kn],['r',r.rv],['n',r.t-r.kn-r.rv]].filter(x=>x[1]>0).map(x=>`<i class="${x[0]}" style="flex:${x[1]}"></i>`).join('')}</div><span>${r.kn} learned · ${r.rv} in review · ${r.t-r.kn-r.rv} not started</span></div>`).join('')}</div>
+   <div class="legend2"><span><i class="lk"></i>Learned</span><span><i class="lr"></i>In review</span><span><i class="ln"></i>Not started</span></div></section>
+  <section class="pvs"><h3>Study next in N${st.level}</h3><p class="sub2">The most common N${st.level} kanji you haven’t started, in the order reviews will introduce them.</p>
+   <div class="nextk">${next.length?next.map(c=>{const k=KM.get(c);return `<button class="simk" data-k="${esc(c)}"><span class="mc" lang="ja">${esc(c)}</span><span>${esc((k[4][0]||'').toLowerCase())}</span></button>`}).join(''):`<p class="sub2">You’ve started every N${st.level} kanji.</p>`}</div></section>
+  <section class="pvs"><h3>Settings</h3>
+   <div class="qset"><span>New kanji per day</span>${seg('newPerDay',[5,10,15,20,30])}</div>
+   <div class="qset"><span>Daily goal (cards)</span>${seg('goal',[10,20,30,50,100])}</div></section>
+ </div>`;
+ const fig=$('#actfig');const draw=()=>{const Wd=fig.clientWidth,H=fig.clientHeight,pad=24,max=Math.max(cfg.goal,...vals.map(v=>v[0]+v[1]),1),bw=(Wd-pad)/30;
+  const y=v=>H-18-(H-30)*v/max;
+  fig.innerHTML=`<svg viewBox="0 0 ${Wd} ${H}" width="${Wd}" height="${H}">${vals.map((v,i)=>{const x=pad+i*bw+bw*.18,w=bw*.64;return `<rect x="${x}" y="${y(v[0])}" width="${w}" height="${H-18-y(v[0])}" rx="2" class="bc"><title>${v[0]} cards, ${v[1]} quiz questions</title></rect><rect x="${x}" y="${y(v[0]+v[1])}" width="${w}" height="${y(v[0])-y(v[0]+v[1])}" rx="2" class="bq"/>`}).join('')}
+  <line x1="${pad}" x2="${Wd}" y1="${y(cfg.goal)}" y2="${y(cfg.goal)}" class="gl2"/><text x="0" y="${y(cfg.goal)+4}" class="ax">${cfg.goal}</text>
+  <text x="${pad}" y="${H-3}" class="ax">30 days ago</text><text x="${Wd}" y="${H-3}" class="ax" text-anchor="end">Today</text></svg>`};
+ draw();new ResizeObserver(draw).observe(fig)}
+
+/* ---------- word detail view ---------- */
+function openWord(word){if(!WI.has(word))return;st.view='word';st.word=word;document.body.classList.add('detail');entry();$('#entry').scrollTop=0;if(narrow())scrollTo({top:0})}
+function wordView(){
+ const el=$('#entry'),w=W[WI.get(st.word)];if(!w){st.view='kanji';return entry()}
+ const a=align(w[0],w[1]),ks=[...new Set([...w[0]].filter(isK))];
+ const ruby=a?a.map(p=>p.s!=null?esc(p.s):`<ruby>${p.c==='々'?esc(p.c):linkK(p.c,'')}<rt class="hl ${p.type==='?'?'':p.type}">${esc(p.v)}</rt></ruby>`).join(''):`<ruby>${[...w[0]].map(x=>isK(x)?linkK(x,''):esc(x)).join('')}<rt>${esc(w[1])}</rt></ruby>`;
+ const senses=w[2].split(';').map(s=>s.trim()).filter(Boolean);
+ const more=ks.map(c=>{const L=(IDX.get(c)||[]).map(i=>W[i]).filter(x=>x[0]!==w[0]&&!/[〜～~]/.test(x[0])).slice(0,6);return{c,L}});
+ el.innerHTML=`<button class="btn back" id="back">Back to index</button>
+ <div class="wv">
+  <div class="crumb">${st.cur?`<button class="link" data-k="${esc(st.cur)}">← ${esc(st.cur)} ${esc((KM.get(st.cur)[4][0]||'').toLowerCase())}</button>`:''}</div>
+  <header class="wvh"><div class="wbig mc" lang="ja">${ruby}</div>
+   <div class="wmeta"><div class="wrd"><span class="rl" lang="ja">${esc(w[1])}</span><button class="play" data-say="${esc(w[1])}" aria-label="Listen">${SPK}</button></div>
+    <ol class="senses">${senses.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>
+    <div class="facts"><span class="fq inl">${freqMeter(w)}</span>${w[3]?`<span><b>N${w[3]}</b>vocabulary</span>`:'<span>Not on the JLPT vocabulary lists</span>'}${a?'':'<span class="use irr" style="margin:0">special reading</span>'}</div></div></header>
+  <section class="pvs"><h3>Kanji in this word</h3><div class="kin">${ks.map(c=>{const k=KM.get(c),p=a&&a.find(x=>x.c===c);return `<button class="kcard" data-k="${esc(c)}"><span class="mc kc" lang="ja">${esc(c)}</span><span class="kt"><b>${esc(k[4].slice(0,2).join(', '))}</b><span>N${k[1]} · ${k[2]} strokes</span>${p&&p.type!=='?'?`<span class="use ${p.type}" style="margin:0">${esc(p.v)}, ${TY[p.type]}</span>`:'<span class="use irr" style="margin:0">part of a special reading</span>'}</span></button>`}).join('')}</div></section>
+  ${more.map(m=>m.L.length?`<section class="pvs"><h3>More words with ${esc(m.c)}</h3><ul class="mini">${m.L.map(x=>`<li><button data-w="${esc(x[0])}"><span class="mc" lang="ja">${esc(x[0])}</span><span class="r" lang="ja">${readingLine(x,m.c,align(x[0],x[1]))}</span><span class="m">${esc(gloss(x))}</span></button></li>`).join('')}</ul></section>`:'').join('')}
+ </div>`}
+
+/* ---------- parts and look-alikes ---------- */
+let PARTS=null;
+function partsBand(c){
+ if(!PARTS)return '';
+ const P=PARTS.parts[c]||[],sim=(PARTS.sim[c]||[]).filter(x=>KM.has(x));
+ const withPart=st.part&&P.includes(st.part)?K.filter(k=>k[0]!==c&&(PARTS.parts[k[0]]||[]).includes(st.part)).sort((a,b)=>(b[1]-a[1])||((a[3]||9999)-(b[3]||9999))):null;
+ return `<section class="band2">
+  <div><h3>Parts</h3><div class="parts">${P.map(p=>{const m=PARTS.rad[p]||[];return `<button class="part" data-part="${esc(p)}" aria-pressed="${st.part===p}" title="Show JLPT kanji that contain ${esc(p)}"><span class="ps mc" lang="ja">${esc(p)}</span><span class="pn">${m[2]?esc(m[2]):'&nbsp;'}<small lang="ja">${m[1]?esc(m[1]):''}</small></span></button>`}).join('')}</div>
+   ${withPart?`<div class="withp"><p>${withPart.length} other JLPT kanji contain ${esc(st.part)}</p><div class="kchips">${withPart.slice(0,48).map(k=>`<button data-k="${esc(k[0])}" title="N${k[1]} · ${esc(k[4][0]||'')}"><span lang="ja">${esc(k[0])}</span><small>N${k[1]}</small></button>`).join('')}${withPart.length>48?`<span class="more2">+${withPart.length-48} more</span>`:''}</div></div>`:'<p class="sub2">Select a part to see other kanji built from it.</p>'}</div>
+  <div><h3>Easily confused with</h3>${sim.length?`<div class="sims">${sim.map(x=>{const k=KM.get(x);return `<button class="simk" data-k="${esc(x)}"><span class="mc" lang="ja">${esc(x)}</span><span>${esc((k[4][0]||'').toLowerCase())}</span><small>N${k[1]}</small></button>`}).join('')}</div>`:'<p class="sub2">No common look-alikes.</p>'}</div>
+ </section>`}
+
+/* ---------- search helpers ---------- */
+function kanaOf(q){if(/[ぁ-ゖァ-ヺー]/.test(q))return kata2hira(q);if(/^[a-z' -]+$/i.test(q)&&window.wanakana){const h=wanakana.toHiragana(q.replace(/[\s']/g,''));return /^[ぁ-ゖー]+$/.test(h)?h:null}return null}
+function wordSearch(q){
+ if(!q)return[];const kana=kanaOf(q),hasK=/[一-龯々]/.test(q),latin=/^[a-z' -]+$/i.test(q);
+ if(hasK&&[...q].filter(isK).length<2&&q.length<2)return[];
+ const re=latin&&q.length>=3?new RegExp('\\b'+q.replace(/[^a-z' -]/gi,''),'i'):null,out=[];
+ for(const w of W){if(out.length>=40)break;
+  if((hasK&&w[0].includes(q))||(kana&&kana.length>=2&&(kata2hira(w[1]).startsWith(kana)||w[0]===q))||(re&&re.test(gloss(w))))out.push(w)}
+ return out}
 
 /* events */
 document.addEventListener('click',e=>{
  const ddo=e.target.closest('.ddo');if(ddo){const id=ddo.closest('.dd').dataset.dd;closeDD(false);setOpt(id,ddo.dataset.ddv);return}
  const ddb=e.target.closest('.ddb');if(ddb){const d=ddb.closest('.dd');d.classList.contains('open')?closeDD(false):openDD(d);return}
  if(!e.target.closest('.dd'))closeDD(false);
- const fc=e.target.closest('[data-fc]');if(fc){fcAct(fc.dataset.fc);return}
- if(e.target.id==='fc'){fcAct('close');return}
+ if(modal().classList.contains('open')){if(e.target.id==='fc'){closeModal();return}if(modalClick(e))return}
+ const pt=e.target.closest('[data-part]');if(pt){st.part=st.part===pt.dataset.part?null:pt.dataset.part;const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return}
+ const cf=e.target.closest('[data-cfg]');if(cf){const [k,v]=cf.dataset.cfg.split(':');cfg[k]=+v;store.set('cfg',cfg);updateBadge();const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return}
  const rf=e.target.closest('[data-rf]');if(rf){st.rf=st.rf===rf.dataset.rf?null:rf.dataset.rf;st.page=0;if(rf.dataset.say&&st.rf)say(rf.dataset.say,null);const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return}
  const sy=e.target.closest('[data-say]');if(sy){say(sy.dataset.say,sy);return}
  const rv=e.target.closest('.reveal');if(rv){revealed.add(rv.dataset.rev);const n=rv.nextElementSibling;if(n)n.hidden=false;rv.remove();say(rv.dataset.r);return}
  const lv=e.target.closest('[data-lv]');if(lv){st.level=+lv.dataset.lv;st.q='';$('#q').value='';store.set('level',st.level);document.body.classList.remove('detail');levels();grid();$('#kgrid').scrollTop=0;return}
  const kk=e.target.closest('[data-k]');if(kk){open(kk.dataset.k);return}
+ const ww=e.target.closest('[data-w]');if(ww){openWord(ww.dataset.w);return}
  const pg=e.target.closest('[data-page]');if(pg){if(!pg.disabled)goPage(+pg.dataset.page);return}
  const md=e.target.closest('[data-mode]');if(md){st.mode=md.dataset.mode;st.page=0;store.set('mode',st.mode);entry();return}
  const id=e.target.closest('button')?.id;
  if(id==='zin')zoomBy(1);if(id==='zout')zoomBy(-1);
- if(id==='practice')startPractice();
+ if(id==='nav-review'||id==='pv-review')startReview();if(id==='nav-quiz'||id==='pv-quiz')quizStart();if(id==='nav-progress')showProgress();
  if(id==='replay')animate();
  if(id==='back'){document.body.classList.remove('detail');grid();scrollTo({top:0})}
  if(id==='sayk'){const k=KM.get(st.cur);say([...k[5],...k[6].map(clean)].join('、'),e.target.closest('button'))}
@@ -613,28 +961,27 @@ document.addEventListener('change',e=>{const id=e.target.id;const keep=()=>{cons
  if(e.target===hideKnown){store.set('hideKnown',hideKnown.checked);grid()}
  if(e.target===byStroke){store.set('byStroke',byStroke.checked);grid()}});
 let qt;$('#q').addEventListener('input',e=>{clearTimeout(qt);qt=setTimeout(()=>{st.q=e.target.value.trim();levels();grid();
- const ch=[...st.q].filter(isK);if(ch.length===1)open(ch[0]);else if(narrow())document.body.classList.remove('detail')},180)});
+ const ch=[...st.q].filter(isK);if(st.q.length>=2&&WI.has(st.q)&&!narrow())openWord(st.q);else if(ch.length===1&&st.q.length===1)open(ch[0]);else if(narrow())document.body.classList.remove('detail')},180)});
 document.addEventListener('keydown',e=>{
  if((e.ctrlKey||e.metaKey)&&['=','+','-','0'].includes(e.key)){e.preventDefault();if(e.key==='0'){zi=2;applyZoom()}else zoomBy(e.key==='-'?-1:1);return}
- if($('#fc').classList.contains('open')){
-  if(e.key==='Escape')fcAct('close');
-  else if(e.key===' '||e.key==='Enter'){e.preventDefault();fcAct($('#card').classList.contains('rev')?'got':'reveal')}
-  else if(e.key==='1')fcAct('again');else if(e.key==='2')fcAct('got');return}
+ if(modal().classList.contains('open')){modalKey(e);return}
  if(e.target.matches('input,select')){if(e.key==='Escape')e.target.blur();return}
  if(e.key==='/'){e.preventDefault();$('#q').focus();return}
  if(e.key===']'){goPage(st.page+1);return}
  if(e.key==='['){if(st.page>0)goPage(st.page-1);return}
- if(e.key==='p'||e.key==='P'){startPractice();return}
+ if(e.key==='r'||e.key==='R'){startReview();return}
+ if(e.key==='q'||e.key==='Q'){quizStart();return}
  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
   const L=list();const i=L.findIndex(k=>k[0]===st.cur);if(i<0)return;
   const n=L[i+(e.key==='ArrowRight'?1:-1)];if(n){e.preventDefault();open(n[0])}}});
 
 Promise.all([fetch('kanji.json').then(r=>r.json()),fetch('words.json').then(r=>r.json())]).then(([k,w])=>{
- K=k;K.forEach(x=>KM.set(x[0],x));W=w;
+ K=k;K.forEach(x=>KM.set(x[0],x));W=w;W.forEach((x,i)=>WI.set(x[0],i));
  W.forEach((x,i)=>{for(const c of new Set(x[0]))if(KM.has(c)){let a=IDX.get(c);if(!a)IDX.set(c,a=[]);a.push(i)}});
  if(!st.cur||!KM.has(st.cur))st.cur=K.find(x=>x[1]===st.level)[0];
  if(!narrow())document.body.classList.add('detail');
- levels();grid();entry();
+ levels();grid();entry();updateBadge();
+ fetch('parts.json').then(r=>r.json()).then(p=>{PARTS=p;if(st.view!=='word'&&st.view!=='progress'){const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc}}).catch(()=>{});
  fetch('strokes.json').then(r=>r.json()).then(s=>{ST=s;const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc}).catch(()=>{});
 }).catch(()=>{$('#entry').innerHTML='<div class="empty">The kanji data didn’t load. Reload the app to try again.</div>';$('#gtitle').textContent='Not loaded'});
 }

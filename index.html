@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0e0e10">
 <title>JLPT Kanji Compounds</title>
 <script type="application/json" id="claude-artifacts-manifest">{"permissions": []}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,6 +52,14 @@ body.resizing{cursor:col-resize;user-select:none}body.resizing *{cursor:col-resi
 /* ---------- sidebar ---------- */
 .side{background:var(--bg);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:18px 14px 14px;gap:22px;overflow:auto}
 .brand{display:flex;gap:10px;align-items:center;padding:0 6px}
+.hb{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:8px;border:1px solid transparent;background:none;color:var(--mute);margin-left:auto}
+.hb:hover{background:var(--btn);border-color:var(--btnline);color:var(--ink)}
+.srch{display:flex;gap:8px;align-items:center}.srch .search{flex:1}
+.hb.show{display:none;margin-left:0;border-color:var(--btnline);background:var(--btn);color:var(--ink);height:40px;width:40px}
+.hb.fab{display:none;position:fixed;top:12px;right:12px;z-index:9;border-color:var(--btnline);background:var(--raise);color:var(--ink);box-shadow:0 4px 14px rgb(0 0 0 / .25)}
+body.navhidden .side,body.navhidden #rz1{display:none}
+body.navhidden .app{grid-template-columns:0 var(--w2) minmax(0,1fr)}
+body.navhidden .hb.show{display:grid}
 .brand .mk{font:700 22px/1 var(--mincho);width:36px;height:36px;display:grid;place-items:center;border-radius:8px;background:var(--ink);color:var(--pane)}
 .brand b{display:block;font-size:15px;line-height:1.2}
 .brand small{color:var(--mute);font-size:12px}
@@ -77,6 +86,11 @@ body.resizing{cursor:col-resize;user-select:none}body.resizing *{cursor:col-resi
 .zoom button:hover{background:var(--line2)}
 .zoom output{text-align:center;font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums}
 .side{container-type:inline-size}
+.theme{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:var(--btn);border:1px solid var(--btnline);border-radius:8px;padding:2px}
+.theme button{display:flex;align-items:center;justify-content:center;gap:5px;border:0;background:none;border-radius:6px;min-height:34px;font-size:12.5px;color:var(--ink2);padding:0 4px}
+.theme button:hover{color:var(--ink)}
+.theme button[aria-checked=true]{background:var(--raise);color:var(--ink);font-weight:600;box-shadow:0 0 0 1px var(--btnline)}
+@container (max-width:200px){.theme span{display:none}}
 .side .foot{margin-top:auto;display:flex;flex-direction:column;gap:8px}
 .credit{font-size:11.5px;color:var(--mute);line-height:1.45;padding:0 6px}
 
@@ -345,8 +359,8 @@ h4.sub{margin:4px 0 0;font-size:13px;color:var(--mute);font-weight:500}
 .sb i{display:block;min-width:0}.sb .k{background:var(--ok)}.sb .r{background:var(--kun)}.sb .n{background:var(--line)}
 .pvs .qset{margin-bottom:12px}
 @container entry (max-width:860px){.band2{grid-template-columns:minmax(0,1fr)}.wvh{grid-template-columns:minmax(0,1fr);gap:10px}.lvr{grid-template-columns:36px minmax(0,1fr)}.lvr span{grid-column:2}}
-@media(max-width:1180px){.navs{flex-direction:row}.nav{padding:6px 10px}.nav kbd{display:none}}
-@media(max-width:760px){.qopts{grid-template-columns:1fr}}
+@media(max-width:1180px){.navs{flex-direction:row;flex-wrap:wrap}.nav{padding:6px 10px}.nav kbd{display:none}.side .foot .nav span:not(.badge){display:none}}
+@media(max-width:760px){.qopts{grid-template-columns:1fr}.side .navs .nav,.side .foot .nav{font-size:0;gap:0;padding:8px 10px;min-height:40px}.side .nav svg{width:20px;height:20px}.side .nav .badge{font-size:11px;margin-left:5px}.side .foot{margin-left:0}}
 
 .wres{grid-column:1/-1;margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
 .wres h4{margin:0 6px 6px;font-size:12.5px;font-weight:600;color:var(--mute)}
@@ -365,6 +379,76 @@ h4.sub{margin:4px 0 0;font-size:13px;color:var(--mute);font-weight:500}
 .tile rt.hl{font-weight:700}.tile rt.hl.on{color:var(--on)}.tile rt.hl.kun{color:var(--kun)}
 .revm{font-size:12.5px;min-height:28px;padding:2px 10px}
 .mn .use{margin-left:8px}
+/* ---------- decluttered layout ---------- */
+.side{gap:20px}
+.side .foot{gap:6px}
+.nav .badge.soft{background:var(--kunbg);color:var(--kun)}
+.irow{align-items:center}
+.ddb.icon{padding:0;width:34px;min-height:32px;justify-content:center}
+.ddb .cnt{background:var(--ink);color:var(--raise);border-radius:9px;font-size:11px;font-weight:700;padding:0 6px;line-height:17px}
+.ddm h4{margin:10px 10px 4px}.ddm h4:first-child{margin-top:4px}
+.ddm.vm{min-width:270px;max-height:min(70vh,520px);overflow:auto}
+.ddo[role=menuitemcheckbox][aria-checked=true] .ck,.ddo[role=menuitemradio][aria-checked=true] .ck{opacity:1}
+.tabs{display:flex;gap:4px;padding:0 clamp(20px,3vw,44px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:3;background:var(--raise)}
+.tabs button{border:0;background:none;padding:12px 4px 10px;margin-right:18px;font-size:14px;font-weight:600;color:var(--mute);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--ink)}
+.tabs button span{font-weight:500;font-size:12.5px;color:var(--mute);margin-left:4px}
+.wbar{top:45px}
+.actf{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:10px clamp(20px,3vw,44px) 0;font-size:12.5px;color:var(--mute)}
+.actf .clr{margin:0;background:var(--btn);border-color:var(--btnline);color:var(--ink2);padding:3px 10px}
+.actf .clr:hover{background:var(--btnh)}
+/* quiz */
+.card.wide{width:min(720px,100%)}
+.qtypes{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px}
+.qtypes button{display:flex;flex-direction:column;align-items:flex-start;gap:1px;text-align:left;border:1px solid var(--btnline);background:var(--btn);border-radius:9px;padding:9px 12px;font-size:13.5px}
+.qtypes button small{font-size:11.5px;color:var(--mute)}
+.qtypes button:hover{background:var(--btnh)}
+.qtypes button[aria-pressed=true]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.qeng{font-size:clamp(22px,3.4vw,30px);font-weight:600;text-align:center;padding:18px 8px;text-wrap:balance}
+.bigplay{display:flex;flex-direction:column;align-items:center;gap:8px;margin:6px auto 4px;border:1px solid var(--btnline);background:var(--btn);border-radius:50%;width:132px;height:132px;justify-content:center;color:var(--ink)}
+.bigplay svg{width:42px;height:42px}.bigplay span{font-size:11.5px;color:var(--mute)}
+.bigplay:hover{background:var(--btnh)}.bigplay.playing{border-color:var(--sel);color:var(--sel)}
+.qopts.words .qo span{font:600 26px/1.2 var(--mincho)}
+.fbw{font-size:20px;font-weight:700}
+.wtag{color:var(--on);background:var(--onbg)}
+.gl.gw{font-size:clamp(64px,12vw,110px)}.card.rev .gl.gw{display:none}
+.wans{text-align:center;font-size:44px;font-weight:700}.wans rt{font:600 15px var(--sans);padding-bottom:3px}.wans rt.on{color:var(--on)}.wans rt.kun{color:var(--kun)}
+.kchips2{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.kchips2 span{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink2);background:var(--pane);border:1px solid var(--line2);border-radius:8px;padding:4px 10px}.kchips2 b{font-size:20px}
+/* sentences */
+.sents{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px}
+.sents li{position:relative;padding:12px 52px 12px 0;border-bottom:1px solid var(--line2)}
+.sents .jp{margin:0;font:500 20px/1.9 var(--sans)}
+.sents rt{font:500 10.5px var(--sans);color:var(--mute)}
+.sents.nofuri rt{visibility:hidden}
+.sents .hit,.sents ruby.hit{color:var(--sel);font-weight:700}
+.sents .en{margin:2px 0 0;font-size:14.5px;color:var(--ink2)}
+.sents .src{margin:4px 0 0;font-size:11.5px;color:var(--mute)}.sents .src a{color:inherit}
+.sents .play{position:absolute;right:0;top:12px}
+#cardsent .sents li{padding-right:44px}#cardsent .jp{font-size:17px}
+/* settings */
+.settings section{display:flex;flex-direction:column;gap:10px;padding-bottom:16px;border-bottom:1px solid var(--line2)}
+.settings section:last-child{border-bottom:0}
+.settings h4{margin:0;font-size:14px}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:14px}
+.settings .theme{min-width:260px}.settings .zoom{min-width:180px}
+.settings textarea{width:100%;margin-top:8px;border:1px solid var(--btnline);background:var(--pane);border-radius:8px;padding:8px;font:12px/1.4 ui-monospace,monospace;color:var(--ink)}
+.settings summary{cursor:pointer;font-size:13.5px;color:var(--ink2)}
+.bkmsg{background:var(--pane);border:1px solid var(--btnline);border-radius:9px;padding:12px;font-size:13.5px;display:flex;flex-direction:column;gap:10px}
+.card .row.left{justify-content:flex-start}
+label.btn{cursor:pointer}
+/* weak + parts finder */
+.simk.weak small{color:var(--kun);font-size:10.5px}
+.rsel{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.part.sm{min-height:40px;padding:4px 10px 4px 6px}.part.sm .ps{font-size:22px;width:26px}
+.rgrid{display:flex;flex-direction:column;gap:6px}
+.rg{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.rn{width:26px;font-size:12px;color:var(--mute);font-variant-numeric:tabular-nums}
+.rp{width:40px;height:40px;border:1px solid var(--btnline);background:var(--btn);border-radius:7px;font-size:21px;font-weight:600;padding:0}
+.rp:hover:not(:disabled){background:var(--btnh)}
+.rp[aria-pressed=true]{background:var(--ink);color:var(--raise);border-color:var(--ink)}
+.rp:disabled{opacity:.25;cursor:default}
+.play.sm{width:34px;height:34px}
 /* ---------- pane-width layouts (the panes can be resized) ---------- */
 @container entry (max-width:860px){
  .ehead{grid-template-columns:auto minmax(0,1fr);gap:22px}
@@ -381,6 +465,7 @@ h4.sub{margin:4px 0 0;font-size:13px;color:var(--mute);font-weight:500}
 @media(max-width:1180px){
  .app{grid-template-columns:var(--w2) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr)}
  .side{grid-area:1/1/2/3}.index{grid-area:2/1}.entry{grid-area:2/2}
+ body.navhidden .app{grid-template-columns:var(--w2) minmax(0,1fr)}
  #rz1{display:none}#rz2{grid-column:2;grid-row:2}
  .side{grid-column:1/-1;flex-direction:row;flex-wrap:wrap;align-items:center;padding:10px 14px;gap:10px 18px;border-right:0;border-bottom:1px solid var(--line);overflow:visible}
  .side .grp h3,.credit,.brand small{display:none}
@@ -394,6 +479,8 @@ h4.sub{margin:4px 0 0;font-size:13px;color:var(--mute);font-weight:500}
  body{overflow:auto}
  .app{display:flex;flex-direction:column;height:auto;min-height:100vh}
  .rz{display:none}
+ body.navhidden.detail .hb.fab{display:grid}
+ .side .brand .hb{margin-left:auto}
  .index,.entry{overflow:visible;border-right:0}
  .kgrid{overflow:visible}
  body.detail .index{display:none}
@@ -414,28 +501,28 @@ h4.sub{margin:4px 0 0;font-size:13px;color:var(--mute);font-weight:500}
 <body>
 <div class="app">
  <aside class="side">
-  <div class="brand"><span class="mk">漢</span><span><b>JLPT Kanji</b><small>Kanji and compounds</small></span></div>
+  <div class="brand"><span class="mk">漢</span><span><b>JLPT Kanji</b><small>Kanji and compounds</small></span><button class="hb" data-navt aria-label="Hide menu" title="Hide menu (Ctrl+B)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button></div>
   <div class="grp"><h3>Level</h3><div class="lvls" id="levels" role="group" aria-label="JLPT level"></div></div>
   <div class="grp"><h3>Study</h3><div class="navs">
-   <button class="nav" id="nav-review"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="5" width="13" height="15" rx="2"/><path d="M8 2h10a2 2 0 0 1 2 2v13"/></svg>Review<span class="badge" id="dueBadge" hidden>0</span><kbd>R</kbd></button>
-   <button class="nav" id="nav-quiz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14"/><path d="M12 17.5h.01"/></svg>Quiz<kbd>Q</kbd></button>
-   <button class="nav" id="nav-progress"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Progress</button>
+   <button class="nav" id="nav-review" title="Review"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="5" width="13" height="15" rx="2"/><path d="M8 2h10a2 2 0 0 1 2 2v13"/></svg>Review<span class="badge" id="dueBadge" hidden>0</span><kbd>R</kbd></button>
+   <button class="nav" id="nav-quiz" title="Quiz"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5V14"/><path d="M12 17.5h.01"/></svg>Quiz<kbd>Q</kbd></button>
+   <button class="nav" id="nav-progress" title="Progress" data-view="progress"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Progress</button>
+   <button class="nav" id="nav-weak" title="Weak kanji" data-view="weak"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17h.01"/></svg>Weak kanji<span class="badge soft" id="weakBadge" hidden>0</span></button>
+   <button class="nav" id="nav-parts" title="Find by parts" data-view="radicals"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><path d="M17 13v8M13 17h8"/></svg>Find by parts</button>
   </div></div>
-  <div class="grp opts"><h3>Index</h3>
-   <label class="tog">Hide learned<input type="checkbox" id="hideKnown"></label>
-   <label class="tog">Sort by strokes<input type="checkbox" id="byStroke"></label>
-  </div>
   <div class="foot">
-   <div class="zoom" role="group" aria-label="Text size"><button id="zout" aria-label="Smaller" title="Ctrl −">A−</button><output id="zval">100%</output><button id="zin" aria-label="Larger" title="Ctrl +">A+</button></div>
+   <button class="nav" id="nav-settings" title="Settings and backup"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Settings and backup</button>
    <button class="sbtn" id="install" hidden>Install as app</button>
-   <p class="credit">Words from JMdict (EDRDG, CC BY-SA) and JLPT vocabulary lists. Levels follow Jonathan Waller’s lists. Stroke order from KanjiVG. Parts from KRADFILE (EDRDG) and Kanji alive; look-alikes from Lars Yencken’s kanji confusion data. Word frequency from wordfreq (Wikipedia, subtitles, news, books and web text) and JMdict’s newspaper ranking.</p>
   </div>
  </aside>
  <section class="index" aria-label="Kanji index">
   <div class="ihead">
+   <div class="srch"><button class="hb show" data-navt aria-label="Show menu" title="Show menu (Ctrl+B)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
    <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-    <input id="q" type="search" placeholder="Kanji, meaning or reading" autocomplete="off" aria-label="Search kanji"><span class="kb">/</span></label>
-   <div class="irow"><b id="gtitle">Loading</b><span id="ptext"></span></div>
+    <input id="q" type="search" placeholder="Kanji, meaning or reading" autocomplete="off" aria-label="Search kanji"><span class="kb">/</span></label></div>
+   <div class="irow"><span><b id="gtitle">Loading</b> <span id="ptext"></span></span>
+    <div class="dd r" data-dd="idx"><button class="ddb icon" aria-haspopup="true" aria-expanded="false" aria-label="Index options" title="Index options"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 5h18M6 12h12M10 19h4"/></svg></button>
+     <div class="ddm" role="menu" aria-label="Index options"><h4>Kanji index</h4><button class="ddo" role="menuitemcheckbox" data-ddv="hideKnown" tabindex="-1" id="o-hideKnown"><svg class="ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg><span>Hide learned kanji</span></button><button class="ddo" role="menuitemcheckbox" data-ddv="byStroke" tabindex="-1" id="o-byStroke"><svg class="ck" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg><span>Sort by stroke count</span></button></div></div></div>
   </div>
   <div class="kgrid" id="kgrid"></div>
  </section>
@@ -444,6 +531,7 @@ h4.sub{margin:4px 0 0;font-size:13px;color:var(--mute);font-weight:500}
  <main class="entry" id="entry" aria-live="polite"><div class="empty">Loading the kanji lists…</div></main>
 </div>
 <div class="fc" id="fc" role="dialog" aria-modal="true" aria-label="Study"><div class="card" id="card"></div></div>
+<button class="hb fab" data-navt aria-label="Show menu" title="Show menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
 <div class="toast" id="toast" role="status"></div>
 <script src="wanakana.min.js"></script>
 <script>
@@ -454,10 +542,10 @@ const store={get(k,d){try{const v=localStorage.getItem('jlptk.'+k);return v==nul
 const LV=[5,4,3,2,1];
 const SPK='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/><path d="M18.5 6.5a8 8 0 0 1 0 11"/></svg>';
 let K=[],KM=new Map(),W=[],WI=new Map(),IDX=new Map(),ST=null;
-let st={layout:store.get('layout','list'),hideMean:store.get('hideMean',false),view:'kanji',part:null,word:null,level:store.get('level',5),cur:store.get('cur',null),q:'',mode:store.get('mode','comp'),maxLv:store.get('maxLv',1),jlptOnly:store.get('jlptOnly',false),rmode:store.get('rmode','ruby'),sort:store.get('sort','freq'),page:0,rf:null};
+let st={tab:store.get('tab','words'),rsel:[],wordR:null,layout:store.get('layout','list'),hideMean:store.get('hideMean',false),view:'kanji',part:null,word:null,level:store.get('level',5),cur:store.get('cur',null),q:'',mode:store.get('mode','comp'),maxLv:store.get('maxLv',1),jlptOnly:store.get('jlptOnly',false),rmode:store.get('rmode','ruby'),sort:store.get('sort','freq'),page:0,rf:null};
 let known=new Set(store.get('known',[])),revealed=new Set();
-const hideKnown=$('#hideKnown'),byStroke=$('#byStroke');
-hideKnown.checked=store.get('hideKnown',false);byStroke.checked=store.get('byStroke',false);
+const hideKnown={checked:store.get('hideKnown',false)},byStroke={checked:store.get('byStroke',false)};
+function idxOpts(){[['hideKnown',hideKnown],['byStroke',byStroke]].forEach(([id,o])=>{const b=document.getElementById('o-'+id);if(b){b.setAttribute('aria-checked',String(o.checked));b.setAttribute('aria-selected',String(o.checked))}})}
 const kata2hira=s=>s.replace(/[ァ-ヶ]/g,c=>String.fromCharCode(c.charCodeAt(0)-0x60));
 const hira2kata=s=>s.replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60));
 const isK=c=>KM.has(c);
@@ -468,9 +556,21 @@ let tt;function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('sh
 
 /* zoom */
 const ZS=[.8,.9,1,1.1,1.25,1.4,1.6,1.8];let zi=ZS.indexOf(store.get('zoom',1));if(zi<0)zi=2;
-function applyZoom(){const z=ZS[zi];document.documentElement.style.zoom=z;document.documentElement.style.setProperty('--z',z);$('#zval').textContent=Math.round(z*100)+'%';store.set('zoom',z)}
-function zoomBy(d){zi=Math.min(ZS.length-1,Math.max(0,zi+d));applyZoom();if(typeof applyW==='function')applyW(false)}
+function applyZoom(){const z=ZS[zi];document.documentElement.style.zoom=z;document.documentElement.style.setProperty('--z',z);const zv=$('#zval');if(zv)zv.textContent=Math.round(z*100)+'%';store.set('zoom',z)}
+function zoomBy(d){zi=Math.min(ZS.length-1,Math.max(0,zi+d));applyZoom();try{applyW(false)}catch(e){}}
 applyZoom();
+/* collapsible navigation */
+let navHidden=store.get('navHidden',false);
+function applyNav(){document.body.classList.toggle('navhidden',navHidden);document.querySelectorAll('[data-navt]').forEach(b=>b.setAttribute('aria-expanded',String(!navHidden)));try{applyW(false)}catch(e){}}
+function toggleNav(){navHidden=!navHidden;store.set('navHidden',navHidden);applyNav();const t=navHidden?document.querySelector('.hb.show'):document.querySelector('.brand .hb');if(t&&t.offsetParent)t.focus()}
+applyNav();
+/* theme: an inline color-scheme beats the stylesheet and the viewer's data-theme */
+let theme=store.get('theme','system');
+function applyTheme(){const r=document.documentElement;r.style.colorScheme=theme==='system'?'':theme;
+ document.querySelectorAll('[data-theme-set]').forEach(b=>b.setAttribute('aria-checked',String(b.dataset.themeSet===theme)));
+ const m=document.querySelector('meta[name="theme-color"]');const dark=theme==='dark'||(theme==='system'&&matchMedia('(prefers-color-scheme: dark)').matches&&!r.matches('[data-theme=light]'))||(theme==='system'&&r.matches('[data-theme=dark]'));
+ if(m)m.content=dark?'#0e0e10':'#f1f1f2'}
+applyTheme();
 
 /* resizable panes */
 const app=$('.app'),DEF={w1:232,w2:400},LIM={w1:[180,380],w2:[240,720]};
@@ -478,7 +578,7 @@ let W1=store.get('w1',DEF.w1),W2=store.get('w2',DEF.w2);
 const twoPane=()=>matchMedia('(max-width:1180px)').matches;
 function clampW(){const z=ZS[zi],total=app.getBoundingClientRect().width/z,minEntry=480;
  W1=Math.round(Math.min(LIM.w1[1],Math.max(LIM.w1[0],W1)));
- const used=twoPane()?0:W1;W2=Math.round(Math.min(LIM.w2[1],Math.max(LIM.w2[0],Math.min(W2,total-used-minEntry))))}
+ const used=twoPane()||navHidden?0:W1;W2=Math.round(Math.min(LIM.w2[1],Math.max(LIM.w2[0],Math.min(W2,total-used-minEntry))))}
 function applyW(save){clampW();app.style.setProperty('--w1',W1+'px');app.style.setProperty('--w2',W2+'px');
  $('#rz1').setAttribute('aria-valuenow',W1);$('#rz2').setAttribute('aria-valuenow',W2);if(save){store.set('w1',W1);store.set('w2',W2)}}
 function startDrag(which,e){
@@ -565,6 +665,7 @@ const rkey=u=>u.irr?'irr':u.r;
 function levels(){
  $('#levels').innerHTML=LV.map(n=>{const L=K.filter(k=>k[1]===n),kn=L.filter(k=>known.has(k[0])).length;
   return `<button class="lv" data-lv="${n}" aria-pressed="${!st.q&&st.level===n}"><span class="n">N${n}</span><span class="m"><i style="width:${L.length?100*kn/L.length:0}%"></i></span><span class="c">${kn}/${L.length}</span></button>`}).join('')}
+function kanjiList(){return list()}
 function list(){
  let L;
  if(st.q){const q=st.q.trim().toLowerCase(),kana=kanaOf(st.q.trim());const chars=[...st.q].filter(isK);
@@ -613,6 +714,8 @@ function dd(id,label,val,head,opts,cls=''){const cur=opts.find(o=>o[0]===val)||o
 function closeDD(focusBtn){const o=document.querySelector('.dd.open');if(!o)return;o.classList.remove('open');const b=o.querySelector('.ddb');b.setAttribute('aria-expanded','false');if(focusBtn)b.focus()}
 function openDD(d){closeDD();d.classList.add('open');d.querySelector('.ddb').setAttribute('aria-expanded','true');(d.querySelector('.ddo[aria-selected=true]')||d.querySelector('.ddo')).focus()}
 function setOpt(id,v){const keep=()=>{const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc};
+ if(id==='idx'){const o=v==='hideKnown'?hideKnown:byStroke;o.checked=!o.checked;store.set(v,o.checked);idxOpts();grid();return}
+ if(id==='view'){const [k,val]=v.split(':');if(k==='tog'){st[val]=!st[val];store.set(val,st[val]);if(val==='hideMean')revealed.clear();st.page=0;keep();return}id=k==='sort'?'sortBy':k;v=val}
  if(id==='maxLv'){st.maxLv=+v;st.page=0;store.set('maxLv',st.maxLv)}
  if(id==='sortBy'){st.sort=v;st.page=0;store.set('sort',st.sort)}
  if(id==='rmode'){st.rmode=v;store.set('rmode',st.rmode);revealed.clear()}
@@ -647,7 +750,7 @@ function tilesHtml(all,c){
  const groups=new Map();
  for(const w of all){const u=useOf(w,c),key=u.irr?'irr':u.type+':'+u.r;if(!groups.has(key))groups.set(key,{u,L:[]});groups.get(key).L.push(w)}
  const G=[...groups.values()].sort((a,b)=>(a.u.irr?1:0)-(b.u.irr?1:0)||b.L.length-a.L.length);
- const tile=w=>`<button class="tile" data-w="${esc(w[0])}" lang="ja" title="${esc(st.hideMean?w[1]:w[1]+' · '+gloss(w))}">${tileRuby(w,c)}</button>`;
+ const tile=w=>`<button class="tile" data-w="${esc(w[0])}" data-wr2="${esc(w[1])}" lang="ja" title="${esc(st.hideMean?w[1]:w[1]+' · '+gloss(w))}">${tileRuby(w,c)}</button>`;
  return `<div class="tilewrap">${G.map(g=>`<section class="tgrp"><h4>${g.u.irr?'<span class="use irr" style="margin:0">special readings</span>':`<span class="use ${g.u.type}" style="margin:0">${esc(c)} = <span lang="ja">${g.u.type==='on'?esc(hira2kata(g.u.r)):kunHtml(g.u.r)}</span>, ${TY[g.u.type]}</span>`}<small>${g.L.length} word${g.L.length>1?'s':''}</small></h4>
   <div class="tiles">${g.L.map(tile).join('')}</div></section>`).join('')}
   <p class="pinfo">${all.length} words, most common first in each group. Hover a word for its ${st.hideMean?'reading':'meaning'}; click it for details.</p></div>`}
@@ -659,12 +762,12 @@ function wordRow(w,c,n){
  const line=`<span class="rl">${readingLine(w,c,a)}</span>`;
  const hid=st.rmode==='hide'&&!revealed.has(w[0]);
  const top=st.rmode==='ruby'?tag.replace('class="use','style="margin-left:0" class="use'):hid?`<button class="reveal" data-rev="${esc(w[0])}" data-r="${esc(w[1])}">Show reading</button><span hidden>${line}${tag}</span>`:line+tag;
- return `<li class="wr" data-w="${esc(w[0])}" title="Open word details"><span class="rk">${n}</span><span class="wd" lang="ja">${wd}</span>
+ return `<li class="wr" data-w="${esc(w[0])}" data-wr2="${esc(w[1])}" title="Open word details"><span class="rk">${n}</span><span class="wd" lang="ja">${wd}</span>
   <span class="info"><span>${top}</span>${mean(w)}</span>
   <span class="fq">${freqMeter(w)}<span class="lvl">${w[3]?'N'+w[3]+' vocabulary':''}</span></span>
   <button class="play" data-say="${esc(w[1])}" aria-label="Play ${esc(w[1])}" title="Listen">${SPK}</button></li>`}
 function entry(){
- if(st.view==='word')return wordView();if(st.view==='progress')return progressView();
+ if(st.view==='word')return wordView();if(st.view==='progress')return progressView();if(st.view==='weak')return weakView();if(st.view==='radicals')return radView();
  const el=$('#entry');const k=KM.get(st.cur);
  if(!k){el.innerHTML=`<div class="empty">Choose a kanji from the index to see its readings and compounds.</div>`;return}
  const [c,lv,strokes,freq,mean,on,kun,grade]=k;
@@ -674,123 +777,181 @@ function entry(){
  if(st.sort==='level')all=[...all].sort((a,b)=>((b[3]||0)-(a[3]||0))||(b[4]-a[4]));
  const pages=Math.max(1,Math.ceil(all.length/PER));st.page=Math.min(st.page,pages-1);
  const from=st.page*PER,show=all.slice(from,from+PER);
- const chip=(r,type,label,sayTxt)=>`<button class="chip ${type}" data-rf="${esc(r)}" data-say="${esc(sayTxt)}" aria-pressed="${st.rf===r}" ${cnt[r]?'':'data-zero'} title="Show words that use this reading">${label}<span class="ct">${cnt[r]||0}</span></button>`;
+ const chip=(r,type,label,sayTxt)=>`<button class="chip ${type}" data-rf="${esc(r)}" data-say="${esc(sayTxt)}" aria-pressed="${st.rf===r}" ${cnt[r]?'':'data-zero'} title="Show only words that use this reading">${label}<span class="ct">${cnt[r]||0}</span></button>`;
  const segs=[...on.map(r=>[r,'on',hira2kata(r)]),...kun.map(r=>[r,'kun',clean(r)]),['irr','irr','special']].filter(s=>cnt[s[0]]);
- const usage=base.length?`<div class="usage"><div class="ub">${segs.map(([r,t,l])=>`<button class="${t}" data-rf="${esc(r)}" aria-pressed="${!st.rf||st.rf===r}" style="flex:${cnt[r]}" title="${esc(l)}: ${cnt[r]} word${cnt[r]>1?'s':''}"></button>`).join('')}</div><p>How ${esc(c)} is read across ${base.length} word${base.length>1?'s':''}. Select a reading to filter the list.</p></div>`:'';
+ const usage=base.length?`<div class="usage"><div class="ub">${segs.map(([r,t,l])=>`<button class="${t}" data-rf="${esc(r)}" aria-pressed="${!st.rf||st.rf===r}" style="flex:${cnt[r]}" title="${esc(l)}: ${cnt[r]} word${cnt[r]>1?'s':''}"></button>`).join('')}</div><p>How ${esc(c)} is read across its ${base.length} words</p></div>`:'';
+ const tab=st.tab||'words';
+ /* active filters, shown as removable chips so the list is never filtered by something you can't see */
+ const LVL={1:'Any level',2:'N5–N2',3:'N5–N3',4:'N5–N4',5:'N5 only'};
+ const active=[st.rf?['rf',st.rf==='irr'?'Special readings':'Read as '+clean(st.rf)]:null,st.maxLv!==1?['maxLv','Kanji: '+LVL[st.maxLv]]:null,st.jlptOnly?['jlptOnly','JLPT words only']:null,
+  st.hideMean?['hideMean','Meanings hidden']:null,st.rmode!=='ruby'?['rmode',st.rmode==='hide'?'Readings hidden':'Readings beside']:null,st.sort!=='freq'?['sort','Easiest level first']:null].filter(Boolean);
+ const opt=(key,val,label,desc,on)=>`<button class="ddo" role="menuitemradio" data-ddv="${key}:${val}" aria-checked="${on}" aria-selected="${on}" tabindex="-1">${CHECK}<span>${label}</span>${desc?`<small>${desc}</small>`:''}</button>`;
+ const viewMenu=`<div class="dd r" data-dd="view"><button class="ddb" aria-haspopup="true" aria-expanded="false"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"/><circle cx="16" cy="6" r="2"/><circle cx="10" cy="12" r="2"/><circle cx="18" cy="18" r="2"/></svg><span class="dv">View options</span>${active.filter(a=>a[0]!=='rf').length?`<span class="cnt">${active.filter(a=>a[0]!=='rf').length}</span>`:''}${CHEV}</button>
+  <div class="ddm vm" role="menu" aria-label="View options">
+   <h4>Words may only use kanji from</h4>${[1,2,3,4,5].map(n=>opt('maxLv',n,LVL[n],'',st.maxLv===n)).join('')}
+   <h4>Readings</h4>${opt('rmode','ruby','Furigana above','',st.rmode==='ruby')}${opt('rmode','line','Beside the word, larger','',st.rmode==='line')}${opt('rmode','hide','Hidden','Tap a word to reveal',st.rmode==='hide')}
+   <h4>Order</h4>${opt('sort','freq','Most common first','',st.sort==='freq')}${opt('sort','level','Easiest JLPT level first','',st.sort==='level')}
+   <h4>Show</h4>${opt('tog','jlptOnly','Only JLPT vocabulary','',st.jlptOnly)}${opt('tog','hideMean','Hide meanings','Test yourself',st.hideMean)}
+  </div></div>`;
  el.innerHTML=`<button class="btn back" id="back">Back to index</button>
  <header class="ehead">
   <div><div class="box">${strokeSvg(c)}</div><div class="boxtools"><span>${strokes} strokes</span>${ST&&ST[c]?'<button class="link" id="replay">Replay</button>':''}</div></div>
   <div class="einfo">
    <div class="title"><span class="big" lang="ja">${esc(c)}</span><h2>${esc(mean.slice(0,3).join(', '))}</h2></div>
-   <div class="facts"><span><b>N${lv}</b>JLPT</span>${grade?`<span><b>${grade<=6?'Grade '+grade:'Secondary'}</b>school</span>`:''}${freq?`<span><b>#${freq}</b>in newspaper frequency</span>`:''}</div>
+   <div class="facts"><span><b>N${lv}</b>JLPT</span>${grade?`<span><b>${grade<=6?'Grade '+grade:'Secondary'}</b>school</span>`:''}${freq?`<span><b>#${freq}</b>in newspapers</span>`:''}</div>
    <dl class="rd" lang="ja"><dt>On’yomi</dt><dd>${on.length?on.map(r=>chip(r,'on',esc(hira2kata(r)),r)).join(''):'<span style="color:var(--mute)">None</span>'}</dd>
     <dt>Kun’yomi</dt><dd>${kun.length?kun.map(r=>chip(r,'kun',kunHtml(r),clean(r))).join(''):'<span style="color:var(--mute)">None</span>'}</dd>${cnt.irr?`<dt>Other</dt><dd>${chip('irr','irr','Special readings','')}</dd>`:''}</dl>
    ${usage}
   </div>
   <div class="eact"><button class="btn ${known.has(c)?'learned':'pri'}" id="known" aria-pressed="${known.has(c)}">${known.has(c)?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>Learned':'Mark as learned'}</button><button class="btn" id="sayk">${SPK} Play readings</button></div>
  </header>
- ${partsBand(c)}
+ <nav class="tabs" role="tablist"><button role="tab" data-tab="words" aria-selected="${tab==='words'}">Words <span>${base.length}</span></button><button role="tab" data-tab="parts" aria-selected="${tab==='parts'}">Parts and look-alikes</button></nav>
+ ${tab==='parts'?partsBand(c):`
  <div class="wbar">
-  <h3>Words with ${esc(c)} <small>${all.length} words</small>${st.rf?`<button class="clr" data-rf="${esc(st.rf)}">${st.rf==='irr'?'Special readings':'Read as '+esc(clean(st.rf))} ✕</button>`:''}</h3>
+  <div class="seg" role="group" aria-label="Word type">${[['comp','Compounds'],['single','With kana'],['all','All']].map(([v,t])=>`<button data-mode="${v}" aria-pressed="${st.mode===v}">${t}</button>`).join('')}</div>
   <div class="ctrls">
-   <div class="seg" role="group" aria-label="Word type">${[['comp','Compounds'],['single','With kana'],['all','All words']].map(([v,t])=>`<button data-mode="${v}" aria-pressed="${st.mode===v}">${t}</button>`).join('')}</div>
-   ${dd('maxLv','Kanji',st.maxLv,'Words may only contain kanji from',[[1,'Any level','All JLPT kanji, N5 to N1'],[2,'N5–N2','Leaves out N1 kanji'],[3,'N5–N3','Leaves out N2 and N1 kanji'],[4,'N5–N4','Only beginner kanji'],[5,'N5 only','Only the first 79 kanji']])}
-   ${dd('rmode','Reading',st.rmode,'Show readings',[['ruby','Furigana','Above each kanji'],['line','Beside','Next to the word, larger'],['hide','Hidden','Tap to reveal, for self-testing']])}
-   ${dd('sortBy','Sort',st.sort,'Order words by',[['freq','Most common','How often the word is used'],['level','Easiest level','N5 words first, then most common']],'r')}
-   <button class="tgl" id="jlptOnly" aria-pressed="${st.jlptOnly}"><i></i>JLPT words only</button>
-   <button class="tgl" id="hideMean" aria-pressed="${st.hideMean}"><i></i>Hide meanings</button>
    <div class="seg" role="group" aria-label="Layout">${[['list','List'],['tiles','Tiles']].map(([v,t])=>`<button data-layout="${v}" aria-pressed="${st.layout===v}">${t}</button>`).join('')}</div>
+   ${viewMenu}
   </div>
  </div>
- ${all.length?(st.layout==='tiles'?tilesHtml(all,c):`<ul class="words">${show.map((w,i)=>wordRow(w,c,from+i+1)).join('')}</ul>${pager(pages,all.length,from,show.length)}`):`<p class="empty" style="padding:28px clamp(20px,3vw,44px)">No words match these filters. Choose “All words” or allow kanji from more levels.</p>`}
+ ${active.length?`<div class="actf"><span>${all.length} word${all.length===1?'':'s'} ·</span>${active.map(([k,l])=>`<button class="clr" data-reset="${k}" title="Remove this filter">${esc(l)} <span aria-hidden="true">✕</span></button>`).join('')}</div>`:''}
+ ${all.length?(st.layout==='tiles'?tilesHtml(all,c):`<ul class="words">${show.map((w,i)=>wordRow(w,c,from+i+1)).join('')}</ul>${pager(pages,all.length,from,show.length)}`):`<p class="empty" style="padding:28px clamp(20px,3vw,44px)">No words match these filters. Remove a filter above, or choose “All”.</p>`}`}
  <div style="height:24px"></div>`;
  requestAnimationFrame(animate)}
-function open(c){if(!isK(c))return;st.view='kanji';st.part=null;st.cur=c;st.rf=null;st.page=0;revealed.clear();store.set('cur',c);document.body.classList.add('detail');grid();entry();
+function open(c){if(!isK(c))return;st.view='kanji';setTimeout(navState);st.part=null;st.cur=c;st.rf=null;st.page=0;revealed.clear();store.set('cur',c);document.body.classList.add('detail');grid();entry();
  if(narrow())scrollTo({top:0});else $('#entry').scrollTop=0;
  const b=document.querySelector(`.k[data-k="${CSS.escape(c)}"]`);if(b)b.scrollIntoView({block:'nearest'})}
 
 /* ================= study: spaced repetition, quiz, progress ================= */
 const DAY=()=>{const d=new Date();return Math.floor((d.getTime()-d.getTimezoneOffset()*60000)/86400000)};
 let srs=store.get('srs',{});           /* kanji -> [intervalDays, ease, dueDay, reps, lapses] */
+let srsW=store.get('srsW',{});         /* "word|reading" -> same shape */
 let act=store.get('act',{});           /* day -> [reviews, newLearned, quizQuestions, quizCorrect] */
+let qmiss=store.get('qmiss',{}),qmissW=store.get('qmissW',{});
 let cfg=Object.assign({newPerDay:10,goal:20},store.get('cfg',{}));
-const saveSrs=()=>store.set('srs',srs);
+const saveSrs=()=>{store.set('srs',srs);store.set('srsW',srsW)};
+const saveMiss=()=>{store.set('qmiss',qmiss);store.set('qmissW',qmissW)};
+const wkey=w=>w[0]+'|'+w[1];
+const WK=new Map();
+const wordByKey=k=>{if(WK.has(k))return WK.get(k);const [a,b]=k.split('|');const w=W.find(x=>x[0]===a&&x[1]===b)||null;WK.set(k,w);return w};
 function logAct(i,n=1){const d=DAY();const a=act[d]||(act[d]=[0,0,0,0]);a[i]+=n;store.set('act',act)}
-function dueList(){const t=DAY();return Object.keys(srs).filter(c=>srs[c][2]<=t&&KM.has(c)).sort((a,b)=>srs[a][2]-srs[b][2])}
+function dueList(){const t=DAY();
+ const k=Object.keys(srs).filter(c=>srs[c][2]<=t&&KM.has(c)).map(c=>({t:'k',id:c,d:srs[c][2]}));
+ const w=Object.keys(srsW).filter(x=>srsW[x][2]<=t&&wordByKey(x)).map(x=>({t:'w',id:x,d:srsW[x][2]}));
+ return [...k,...w].sort((a,b)=>a.d-b.d)}
 function newList(n){const t=DAY(),done=(act[t]||[0,0])[1],left=n??Math.max(0,cfg.newPerDay-done);
  return K.filter(k=>k[1]===st.level&&!srs[k[0]]&&!known.has(k[0])).sort((a,b)=>(a[3]||9999)-(b[3]||9999)).slice(0,left).map(k=>k[0])}
-function nextIv(s,g){/* g: 1 again, 2 hard, 3 good, 4 easy */
- const i=s?s[0]:0,e=s?s[1]:2.5;
+function nextIv(s,g){const i=s?s[0]:0,e=s?s[1]:2.5;
  if(g===1)return{i:0,e:Math.max(1.3,e-.2)};
  if(!s||i===0)return{i:[0,0,1,2,4][g],e:g===4?e+.15:g===2?Math.max(1.3,e-.15):e};
  if(g===2)return{i:Math.max(i+1,Math.round(i*1.2)),e:Math.max(1.3,e-.15)};
  if(g===3)return{i:Math.max(i+1,Math.round(i*e)),e};
  return{i:Math.max(i+2,Math.round(i*e*1.3)),e:e+.15}}
 const ivLabel=i=>i===0?'Again today':i<30?`${i} day${i>1?'s':''}`:i<365?`${Math.round(i/30)} mo`:`${(i/365).toFixed(1)} yr`;
-function updateBadge(){const b=$('#dueBadge');if(!b)return;const n=dueList().length+newList().length;b.textContent=n;b.hidden=!n}
+function weakList(){const sc={};
+ for(const [c,s] of Object.entries(srs))if(s[4]&&s[0]<21)sc[c]=(sc[c]||0)+s[4]*2;
+ for(const [c,n] of Object.entries(qmiss))if(n>0)sc[c]=(sc[c]||0)+n;
+ return Object.entries(sc).filter(([c])=>KM.has(c)).sort((a,b)=>b[1]-a[1])}
+function updateBadge(){const b=$('#dueBadge');if(b){const n=dueList().length+newList().length;b.textContent=n;b.hidden=!n}
+ const w=$('#weakBadge');if(w){const n=weakList().length;w.textContent=n;w.hidden=!n}}
+function addWordReview(w){const k=wkey(w);if(!srsW[k]){srsW[k]=[0,2.5,DAY(),0,0];saveSrs()}}
+function removeWordReview(w){delete srsW[wkey(w)];saveSrs()}
+
+/* ---------- example sentences (Tatoeba, linked to senses by JMdict_e_examp) ---------- */
+const EXS={};
+function exShard(word){let s=0;for(const ch of word)s+=ch.codePointAt(0);return s%16}
+function loadEx(w){const i=exShard(w[0]);if(!EXS[i])EXS[i]=fetch(`ex/${i}.json`).then(r=>r.json()).catch(()=>({}));return EXS[i].then(m=>m[wkey(w)]||[])}
+function sentHtml(jp,word){
+ const re=/｜(.+?)《(.+?)》/g;let out='',last=0,m;
+ const piece=t=>{if(!t)return '';const i=t.indexOf(word);return i<0?esc(t):esc(t.slice(0,i))+`<b class="hit">${esc(word)}</b>`+esc(t.slice(i+word.length))};
+ while((m=re.exec(jp))){out+=piece(jp.slice(last,m.index));const base=m[1];const hit=word.includes(base)&&/[一-龯々]/.test(base);
+  out+=`<ruby class="${hit?'hit':''}">${esc(base)}<rt>${esc(m[2])}</rt></ruby>`;last=re.lastIndex}
+ return out+piece(jp.slice(last))}
+function sentBlock(list,word,limit=3){
+ if(!list.length)return '<p class="sub2">No example sentence is linked to this word in the dictionary.</p>';
+ return `<ul class="sents ${st.rmode==='hide'?'nofuri':''}">${list.slice(0,limit).map(s=>{const id=parseInt(s[3],36);return `<li><p class="jp" lang="ja">${sentHtml(s[0],word)}</p><p class="en">${esc(s[1])}</p><p class="src"><a href="https://tatoeba.org/en/sentences/show/${id}" target="_blank" rel="noopener">Tatoeba #${id}</a>${s[2]?' · '+esc(s[2]):''}</p><button class="play sm" data-say="${esc(s[0].replace(/｜(.+?)《(.+?)》/g,'$1'))}" aria-label="Play sentence">${SPK}</button></li>`}).join('')}</ul>`}
 
 /* ---------- modal shell ---------- */
-let sess=null,qz=null;
+let sess=null,qz=null,mview=null;
 const modal=()=>$('#fc');
-function openModal(){modal().classList.add('open')}
-function closeModal(){modal().classList.remove('open');sess=null;qz=null;levels();grid();updateBadge();if(st.view==='progress'||st.view==='kanji'){const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc}}
+function openModal(v){mview=v||null;modal().classList.add('open')}
+function closeModal(){modal().classList.remove('open');sess=null;qz=null;mview=null;levels();grid();updateBadge();const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc}
 const mhead=(t,extra='')=>`<div class="ch"><span>${t}</span><span class="chr">${extra}<button class="btn" data-m="close">Close</button></span></div>`;
 
 /* ---------- review ---------- */
 function startReview(){
- const due=dueList(),nw=newList();sess=null;qz=null;openModal();
+ const due=dueList(),nw=newList();sess=null;qz=null;openModal('review');
  const el=$('#card');el.className='card';
- const next=Object.values(srs).map(s=>s[2]).filter(d=>d>DAY()).sort((a,b)=>a-b)[0];
+ const dk=due.filter(x=>x.t==='k').length,dw=due.length-dk;
+ const next=[...Object.values(srs),...Object.values(srsW)].map(s=>s[2]).filter(d=>d>DAY()).sort((a,b)=>a-b)[0];
  el.innerHTML=`${mhead('Daily review')}
  <div class="face start">
-  <div class="kpis"><div><b>${due.length}</b><span>due for review</span></div><div><b>${nw.length}</b><span>new N${st.level} kanji today</span></div></div>
-  <p class="lead">${due.length+nw.length?`Reviews first, then new kanji from N${st.level} in order of how common they are. Grade each card honestly: the app schedules it again just before you’d forget it.`:`Nothing is due${next?`. Your next review is in ${next-DAY()} day${next-DAY()>1?'s':''}`:''}. You can add more new kanji or practise this level without affecting the schedule.`}</p>
-  <div class="row">${due.length+nw.length?`<button class="btn pri" data-m="go">Start review</button>`:`<button class="btn pri" data-m="more">Learn ${Math.min(5,newList(5).length)} more new kanji</button>`}<button class="btn" data-m="cram">Practise N${st.level} without scheduling</button></div>
-  <p class="hint">New kanji per day: ${cfg.newPerDay}. Change it on the Progress page.</p>
+  <div class="kpis"><div><b>${dk}</b><span>kanji due</span></div><div><b>${dw}</b><span>words due</span></div><div><b>${nw.length}</b><span>new N${st.level} kanji</span></div></div>
+  <p class="lead">${due.length+nw.length?`Grade each card honestly. The app brings it back just before you’d forget it.`:`Nothing is due${next?`. Next review in ${next-DAY()} day${next-DAY()>1?'s':''}`:''}.`}</p>
+  <div class="row">${due.length+nw.length?`<button class="btn pri" data-m="go">Start review <kbd>Enter</kbd></button>`:`<button class="btn pri" data-m="more">Learn ${Math.min(5,newList(5).length)} more kanji</button>`}<button class="btn" data-m="cram">Practise N${st.level} without scheduling</button></div>
+  <p class="hint">Add words to your reviews from any word page.</p>
  </div>`;
- sess={mode:'srs',queue:[...due,...nw],newSet:new Set(nw),i:0,total:due.length+nw.length,again:0,done:0}}
-function startCram(){let L=list().filter(k=>!known.has(k[0]));if(!L.length)L=list();
- if(!L.length){toast('There are no kanji in this list to practise.');return}
- openModal();sess={mode:'cram',queue:L.map(k=>k[0]).sort(()=>Math.random()-.5),newSet:new Set(),i:0,total:L.length,again:0,done:0};showCard()}
+ sess={mode:'srs',queue:[...due.map(x=>({t:x.t,id:x.id})),...nw.map(c=>({t:'k',id:c,isNew:true}))],i:0,total:due.length+nw.length,again:0,done:0}}
+function startCram(list){let ids;
+ if(Array.isArray(list))ids=[...list];else{let Lk=kanjiList().filter(k=>!known.has(k[0]));if(!Lk.length)Lk=kanjiList();ids=Lk.map(k=>k[0])}
+ if(!ids.length){toast('There are no kanji in this list to practise.');return}
+ openModal('review');sess={mode:'cram',queue:ids.sort(()=>Math.random()-.5).map(c=>({t:'k',id:c})),i:0,total:ids.length,again:0,done:0};showCard()}
 function examples(c,n=4){return wordsFor(c,{mode:'all',maxLv:1,jlptOnly:false}).filter(w=>!/[〜～~]/.test(w[0])&&w[0]!==c).slice(0,n)}
+function wordRuby(w){const a=align(w[0],w[1]);
+ return a?a.map(p=>p.s!=null?esc(p.s):`<ruby>${esc(p.c)}<rt class="hl ${p.type==='?'?'':p.type}">${esc(p.v)}</rt></ruby>`).join(''):`<ruby>${esc(w[0])}<rt>${esc(w[1])}</rt></ruby>`}
 function showCard(){
  const el=$('#card');if(!sess)return;
  if(sess.i>=sess.queue.length){el.className='card';
   el.innerHTML=`${mhead('Review complete')}<div class="done"><div class="gl mc">完</div><p>${sess.done} card${sess.done===1?'':'s'} reviewed${sess.again?`, ${sess.again} to see again soon`:''}.</p><div class="row"><button class="btn pri" data-m="close">Done</button>${sess.mode==='srs'?'<button class="btn" data-m="progress">See progress</button>':''}</div></div>`;return}
- const c=sess.queue[sess.i],k=KM.get(c),s=srs[c],isNew=sess.newSet.has(c)&&!s;
- const ex=examples(c);
- const grades=sess.mode==='srs'?[1,2,3,4].map(g=>{const n=nextIv(s,g);return `<button class="btn gr g${g}" data-g="${g}"><b>${['','Again','Hard','Good','Easy'][g]}</b><small>${ivLabel(n.i)}</small><kbd>${g}</kbd></button>`}).join(''):
-  `<button class="btn gr g1" data-g="1"><b>Again</b><small>see it again</small><kbd>1</kbd></button><button class="btn gr g3" data-g="3"><b>I know this</b><small>mark learned</small><kbd>2</kbd></button>`;
+ const it=sess.queue[sess.i],head=`${sess.mode==='srs'?'Review':'Practice'} · ${Math.min(sess.done+1,sess.total)} of ${sess.total}`;
+ const S=it.t==='k'?srs[it.id]:srsW[it.id];
+ const grades=sess.mode==='srs'?[1,2,3,4].map(g=>{const n=nextIv(S,g);return `<button class="btn gr g${g}" data-g="${g}"><b>${['','Again','Hard','Good','Easy'][g]}</b><small>${ivLabel(n.i)}</small></button>`}).join(''):
+  `<button class="btn gr g1" data-g="1"><b>Again</b><small>see it again</small></button><button class="btn gr g3" data-g="3"><b>I know this</b><small>mark learned</small></button>`;
  el.className='card';
- el.innerHTML=`${mhead(`${sess.mode==='srs'?'Review':'Practice'} · ${Math.min(sess.done+1,sess.total)} of ${sess.total}`,isNew?'<span class="newtag">New</span>':'')}
+ if(it.t==='w'){const w=wordByKey(it.id);if(!w){sess.i++;return showCard()}
+  el.innerHTML=`${mhead(head,'<span class="newtag wtag">Word</span>')}<div class="pbar"><i style="width:${100*sess.done/Math.max(1,sess.total)}%"></i></div>
+  <div class="face"><div class="gl gw" lang="ja">${esc(w[0])}</div>
+   <div class="row q"><button class="btn pri" data-m="reveal">Show answer <kbd>Space</kbd></button></div>
+   <div class="ans"><div class="wans mc" lang="ja">${wordRuby(w)}</div><h3>${esc(w[2].split(';').slice(0,2).join('; '))}</h3>
+    <div class="kchips2">${[...new Set([...w[0]].filter(isK))].map(c=>{const k=KM.get(c);return `<span><b class="mc" lang="ja">${esc(c)}</b>${esc((k[4][0]||'').toLowerCase())}</span>`}).join('')}</div>
+    <div id="cardsent"></div>
+    <div class="grades">${grades}</div></div></div>`;
+  loadEx(w).then(L=>{const d=$('#cardsent');if(d&&L.length)d.innerHTML=sentBlock(L,w[0],1)});return}
+ const c=it.id,k=KM.get(c),isNew=it.isNew&&!srs[c],ex=examples(c);
+ el.innerHTML=`${mhead(head,isNew?'<span class="newtag">New</span>':'')}
  <div class="pbar"><i style="width:${100*sess.done/Math.max(1,sess.total)}%"></i></div>
  <div class="face"><div class="gl" lang="ja">${esc(c)}</div>
   <div class="row q"><button class="btn pri" data-m="reveal">Show answer <kbd>Space</kbd></button></div>
   <div class="ans"><h3>${esc(k[4].slice(0,3).join(', '))}</h3>
    <dl class="rd" lang="ja"><dt>On’yomi</dt><dd>${k[5].map(r=>`<button class="chip on" data-say="${esc(r)}">${esc(hira2kata(r))}</button>`).join('')||'None'}</dd><dt>Kun’yomi</dt><dd>${k[6].map(r=>`<button class="chip kun" data-say="${esc(clean(r))}">${kunHtml(r)}</button>`).join('')||'None'}</dd></dl>
-   <ul class="ex" lang="ja">${ex.map(w=>`<li><b>${esc(w[0])}</b><span class="r">${readingLine(w,c,align(w[0],w[1]))}</span><span class="m">${esc(w[2].split(';')[0])}</span></li>`).join('')}</ul>
+   <ul class="ex" lang="ja">${ex.map(w=>`<li><b>${esc(w[0])}</b><span class="r">${readingLine(w,c,align(w[0],w[1]))}</span><span class="m">${esc(gloss(w))}</span></li>`).join('')}</ul>
    <div class="grades">${grades}</div></div></div>`}
 function grade(g){
  if(!sess||!$('#card').classList.contains('rev'))return;
- const c=sess.queue[sess.i];
- if(sess.mode==='cram'){if(g>=3){known.add(c);store.set('known',[...known])}else{sess.again++;sess.queue.push(c);sess.total++}sess.i++;sess.done++;showCard();return}
- const s=srs[c],n=nextIv(s,g),t=DAY(),wasNew=!s;
- srs[c]=[n.i,+n.e.toFixed(2),t+n.i,(s?s[3]:0)+(g>1?1:0),(s?s[4]:0)+(g===1&&s&&s[0]>0?1:0)];
- if(n.i>=21&&!known.has(c)){known.add(c);store.set('known',[...known])}
+ const it=sess.queue[sess.i];
+ if(sess.mode==='cram'){if(g>=3){known.add(it.id);store.set('known',[...known])}else{sess.again++;sess.queue.push(it);sess.total++}sess.i++;sess.done++;showCard();return}
+ const M=it.t==='k'?srs:srsW,s=M[it.id],n=nextIv(s,g),t=DAY(),wasNew=it.t==='k'&&!s;
+ M[it.id]=[n.i,+n.e.toFixed(2),t+n.i,(s?s[3]:0)+(g>1?1:0),(s?s[4]:0)+(g===1&&s&&s[0]>0?1:0)];
+ if(it.t==='k'){if(n.i>=21&&!known.has(it.id)){known.add(it.id);store.set('known',[...known])}if(g>=3&&qmiss[it.id]){qmiss[it.id]--;saveMiss()}}
  saveSrs();logAct(wasNew?1:0);
- if(g===1){sess.again++;sess.queue.splice(Math.min(sess.queue.length,sess.i+4),0,c);sess.total++;sess.newSet.delete(c)}
+ if(g===1){sess.again++;sess.queue.splice(Math.min(sess.queue.length,sess.i+4),0,{t:it.t,id:it.id});sess.total++}
  sess.i++;sess.done++;showCard()}
 
 /* ---------- quiz ---------- */
 let qopt=Object.assign({type:'mix',len:10},store.get('qopt',{}));
+const QT=[['mix','Mixed','A bit of everything'],['typ','Type the reading','Romaji turns into kana'],['mean','Pick the meaning','Four choices'],['kread','Kanji’s reading','On’yomi or kun’yomi in a word'],['rev','English → kanji','Pick the right spelling'],['listen','Listening','Hear a word, pick it']];
 function quizPool(){
  const lv=new Set(K.filter(k=>k[1]===st.level).map(k=>k[0])),seen=new Set(),pool=[];
  for(const c of lv)for(const i of (IDX.get(c)||[])){const w=W[i];if(seen.has(w[0]))continue;seen.add(w[0]);
   if(/[〜～~]/.test(w[0])||(w[4]||0)<3||[...w[0]].length<2)continue;const ks=[...w[0]].filter(isK);if(ks.length<2&&!w[3])continue;if(w[6])continue;
   if(!ks.every(x=>KM.get(x)[1]>=st.level))continue;pool.push(w)}
- return pool.sort((a,b)=>b[4]-a[4]).slice(0,240)}
+ return pool.sort((a,b)=>b[4]-a[4]).slice(0,260)}
 const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const gloss=w=>w[2].split(';')[0].trim();
+function nearWords(w,pool){const ks=new Set([...w[0]].filter(isK)),sim=new Set();
+ ks.forEach(c=>((PARTS&&PARTS.sim[c])||[]).forEach(x=>sim.add(x)));
+ const score=o=>{let s=0;for(const ch of o[0]){if(sim.has(ch))s+=3;else if(ks.has(ch))s+=2}return s+Math.random()};
+ return pool.filter(o=>o[0]!==w[0]).map(o=>[score(o),o]).sort((a,b)=>b[0]-a[0]).map(x=>x[1])}
 function makeQ(w,type,pool){
  const lv=st.level;
  if(type==='kread'){const a=align(w[0],w[1]);const parts=a?a.filter(p=>p.c&&p.c!=='々'&&p.type!=='?'):[];
@@ -803,23 +964,26 @@ function makeQ(w,type,pool){
  if(type==='mean'){const ans=gloss(w),opts=new Set([ans]);
   for(const o of shuffle(pool)){if(opts.size>=4)break;const g=gloss(o);if(o[0]!==w[0]&&g.toLowerCase()!==ans.toLowerCase()&&!opts.has(g))opts.add(g)}
   return{type,w,ans,opts:shuffle([...opts])}}
+ if(type==='rev'||type==='listen'){const ans=w[0],opts=[ans],g=gloss(w).toLowerCase(),r=kata2hira(w[1]);
+  for(const o of nearWords(w,pool)){if(opts.length>=4)break;if(opts.includes(o[0]))continue;if(type==='rev'&&gloss(o).toLowerCase()===g)continue;if(type==='listen'&&kata2hira(o[1])===r)continue;opts.push(o[0])}
+  if(opts.length<4)return null;return{type,w,ans,opts:shuffle(opts)}}
  return{type:'typ',w,ans:kata2hira(w[1])}}
 function quizStart(){
- sess=null;openModal();const el=$('#card');el.className='card';
+ sess=null;qz=null;openModal('quiz');const el=$('#card');el.className='card';
  const pool=quizPool();
- const seg=(key,opts)=>`<div class="seg" role="group">${opts.map(([v,t])=>`<button data-qo="${key}:${v}" aria-pressed="${String(qopt[key])===String(v)}">${t}</button>`).join('')}</div>`;
  el.innerHTML=`${mhead('Quiz')}
  <div class="face start">
-  <p class="lead">Questions use common words built from N${st.level} kanji (and easier ones). ${pool.length} words available.</p>
-  <div class="qset"><span>Question type</span>${seg('type',[['mix','Mixed'],['typ','Type the reading'],['mean','Pick the meaning'],['kread','Pick the kanji’s reading']])}</div>
-  <div class="qset"><span>Length</span>${seg('len',[[10,'10'],[20,'20'],[30,'30']])}</div>
+  <p class="lead">Questions use common words built from N${st.level} kanji and easier ones (${pool.length} words). Change the level in the sidebar.</p>
+  <div class="qset"><span>Question type</span><div class="qtypes">${QT.map(([v,t,d])=>`<button data-qo="type:${v}" aria-pressed="${qopt.type===v}"><b>${t}</b><small>${d}</small></button>`).join('')}</div></div>
+  <div class="qset"><span>Length</span><div class="seg" role="group">${[10,20,30].map(v=>`<button data-qo="len:${v}" aria-pressed="${qopt.len===v}">${v} questions</button>`).join('')}</div></div>
   <div class="row"><button class="btn pri" data-m="qgo" ${pool.length<8?'disabled':''}>Start quiz <kbd>Enter</kbd></button></div>
   ${pool.length<8?'<p class="hint">Not enough words at this level yet. Pick a higher level in the sidebar.</p>':''}
  </div>`}
 function quizGo(retry){
- const pool=quizPool();const types=['typ','mean','kread'];let src;
+ const pool=quizPool();const mixT=['typ','mean','kread','rev'];let src;
  if(retry&&qz&&qz.wrong.length)src=qz.wrong.map(q=>q.w);else src=[...shuffle(pool.slice(0,Math.max(40,qopt.len*4))),...shuffle(pool.slice(Math.max(40,qopt.len*4)))];
- const qs=[];for(const w of src){if(qs.length>=(retry?qz.wrong.length:qopt.len))break;const t=qopt.type==='mix'?types[qs.length%3]:qopt.type;const q=makeQ(w,t,pool)||(qopt.type==='mix'||retry?makeQ(w,'mean',pool):null);if(q)qs.push(q)}
+ const want=retry?qz.wrong.length:qopt.len,qs=[];
+ for(const w of src){if(qs.length>=want)break;const t=qopt.type==='mix'?mixT[qs.length%mixT.length]:qopt.type;const q=makeQ(w,t,pool)||(qopt.type==='mix'||retry?makeQ(w,'mean',pool):null);if(q)qs.push(q)}
  qz={qs:shuffle(qs),i:0,right:0,wrong:[],answered:false};showQ()}
 function wordHtmlFor(q){const w=q.w;
  if(q.type==='kread'){const a=align(w[0],w[1]);return a.map(p=>p.s!=null?esc(p.s):p.c===q.c?`<span class="tgt">${esc(p.c)}</span>`:esc(p.c)).join('')}
@@ -829,88 +993,144 @@ function showQ(){
  if(qz.i>=qz.qs.length){const n=qz.qs.length,pct=Math.round(100*qz.right/Math.max(1,n));
   el.innerHTML=`${mhead('Quiz results')}<div class="face start"><div class="kpis"><div><b>${qz.right}/${n}</b><span>correct</span></div><div><b>${pct}%</b><span>score</span></div></div>
   ${qz.wrong.length?`<h4 class="sub">To review</h4><ul class="ex" lang="ja">${qz.wrong.map(q=>`<li><b>${esc(q.w[0])}</b><span class="r">${esc(q.w[1])}</span><span class="m">${esc(gloss(q.w))}</span></li>`).join('')}</ul>`:'<p class="lead">Every answer right.</p>'}
-  <div class="row">${qz.wrong.length?'<button class="btn pri" data-m="qretry">Retry mistakes</button>':''}<button class="btn ${qz.wrong.length?'':'pri'}" data-m="qnew">New quiz</button><button class="btn" data-m="close">Close</button></div></div>`;return}
+  <div class="row">${qz.wrong.length?'<button class="btn pri" data-m="qretry">Retry mistakes</button><button class="btn" data-m="qadd">Add mistakes to my reviews</button>':''}<button class="btn ${qz.wrong.length?'':'pri'}" data-m="qnew">New quiz</button></div></div>`;return}
  const q=qz.qs[qz.i];qz.answered=false;
- const prompt=q.type==='typ'?'Type the reading in romaji or kana':q.type==='mean'?'What does this word mean?':`How is <span class="tgt">${esc(q.c)}</span> read in this word?`;
+ const P={typ:'Type the reading in romaji or kana',mean:'What does this word mean?',kread:`How is <span class="tgt">${esc(q.c||'')}</span> read in this word?`,rev:'Which word means this?',listen:'Which word did you hear?'};
+ const prompt=q.type==='rev'?`<div class="qeng">${esc(gloss(q.w))}</div>`:q.type==='listen'?`<button class="bigplay" data-say="${esc(q.w[1])}" aria-label="Play the word again">${SPK}<span>Play again <kbd>Space</kbd></span></button>`:`<div class="qw mc" lang="ja">${wordHtmlFor(q)}</div>`;
+ const wordOpts=q.type==='rev'||q.type==='listen';
  el.innerHTML=`${mhead(`Question ${qz.i+1} of ${qz.qs.length}`,`<span class="score">${qz.right} right</span>`)}
  <div class="pbar"><i style="width:${100*qz.i/qz.qs.length}%"></i></div>
- <div class="face"><p class="qp">${prompt}</p><div class="qw mc" lang="ja">${wordHtmlFor(q)}</div>
+ <div class="face"><p class="qp">${P[q.type]}</p>${prompt}
   ${q.type==='typ'?`<form class="qtype" data-qform><input id="qin" autocomplete="off" autocapitalize="off" spellcheck="false" lang="ja" placeholder="e.g. shokuji → しょくじ" aria-label="Reading"><button class="btn pri">Check <kbd>Enter</kbd></button></form>`:
-   `<div class="qopts ${q.type==='kread'?'kana':''}">${q.opts.map((o,i)=>`<button class="qo" data-qa="${i}"><kbd>${i+1}</kbd><span ${q.type==='kread'?'lang="ja"':''}>${esc(o)}</span></button>`).join('')}</div>`}
+   `<div class="qopts ${q.type==='kread'?'kana':''} ${wordOpts?'words':''}">${q.opts.map((o,i)=>`<button class="qo" data-qa="${i}"><kbd>${i+1}</kbd><span lang="${q.type==='mean'?'en':'ja'}">${esc(o)}</span></button>`).join('')}</div>`}
   <div class="fb" id="qfb" hidden></div></div>`;
- const inp=$('#qin');if(inp){try{if(window.wanakana)wanakana.bind(inp,{IMEMode:true})}catch(e){}inp.focus()}}
+ const inp=$('#qin');if(inp){try{if(window.wanakana)wanakana.bind(inp,{IMEMode:true})}catch(e){}inp.focus()}
+ if(q.type==='listen')setTimeout(()=>say(q.w[1],document.querySelector('.bigplay')),150)}
 function answer(val){
  const q=qz.qs[qz.i];if(qz.answered)return;qz.answered=true;
  let ok;if(q.type==='typ'){const v=kata2hira((window.wanakana?wanakana.toHiragana(val):val).trim());ok=v===q.ans}else ok=q.opts[val]===q.ans;
- if(ok)qz.right++;else qz.wrong.push(q);logAct(2);if(ok)logAct(3);
+ if(ok)qz.right++;else{qz.wrong.push(q);qmissW[wkey(q.w)]=(qmissW[wkey(q.w)]||0)+1;
+  const ks=q.type==='kread'?[q.c]:[...new Set([...q.w[0]].filter(c=>isK(c)&&KM.get(c)[1]===st.level))];ks.forEach(c=>qmiss[c]=(qmiss[c]||0)+1);saveMiss()}
+ logAct(2);if(ok)logAct(3);
  if(q.type!=='typ')document.querySelectorAll('.qo').forEach((b,i)=>{b.disabled=true;if(q.opts[i]===q.ans)b.classList.add('right');else if(i===val)b.classList.add('wrong')});
  else{const inp=$('#qin');inp.disabled=true;inp.classList.add(ok?'right':'wrong')}
  const w=q.w,a=align(w[0],w[1]);
  const fb=$('#qfb');fb.hidden=false;fb.className='fb '+(ok?'ok':'no');
- fb.innerHTML=`<div><b>${ok?'Correct':'Not quite'}</b> <span class="rl" lang="ja">${q.type==='kread'?readingLine(w,q.c,a):esc(w[1])}</span> · ${esc(gloss(w))}${q.type==='kread'&&q.ptype?` <span class="use ${q.ptype}">${TY[q.ptype]}</span>`:''}</div>
+ fb.innerHTML=`<div><b>${ok?'Correct':'Not quite'}</b> <span class="mc fbw" lang="ja">${esc(w[0])}</span> <span class="rl" lang="ja">${q.type==='kread'?readingLine(w,q.c,a):esc(w[1])}</span> · ${esc(gloss(w))}${q.type==='kread'&&q.ptype?` <span class="use ${q.ptype}">${TY[q.ptype]}</span>`:''}</div>
  <div class="row"><button class="play" data-say="${esc(w[1])}" aria-label="Listen">${SPK}</button><button class="btn pri" data-m="qnext" id="qnext">Next <kbd>Enter</kbd></button></div>`;
  $('#qnext').focus()}
+
+/* ---------- settings and backup ---------- */
+let bkPending=null;
+function backupData(){const d={};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('jlptk.'))d[k.slice(6)]=localStorage.getItem(k)}}catch(e){}
+ return {app:'jlpt-kanji-compounds',version:1,saved:new Date().toISOString(),data:d}}
+function settingsView(msg){
+ sess=null;qz=null;openModal('settings');const el=$('#card');el.className='card wide';
+ const seg=(key,opts)=>`<div class="seg" role="group">${opts.map(v=>`<button data-cfg="${key}:${v}" aria-pressed="${cfg[key]===v}">${v}</button>`).join('')}</div>`;
+ const bd=backupData(),nKeys=Object.keys(bd.data).length;
+ el.innerHTML=`${mhead('Settings')}
+ <div class="face start settings">
+  <section><h4>Appearance</h4>
+   <div class="srow"><span>Theme</span><div class="theme" role="radiogroup" aria-label="Theme">${[['system','System'],['light','Light'],['dark','Dark']].map(([v,t])=>`<button data-theme-set="${v}" role="radio" aria-checked="${theme===v}">${t}</button>`).join('')}</div></div>
+   <div class="srow"><span>Text size</span><div class="zoom" role="group" aria-label="Text size"><button id="zout" aria-label="Smaller">A−</button><output id="zval">${Math.round(ZS[zi]*100)}%</output><button id="zin" aria-label="Larger">A+</button></div></div>
+  </section>
+  <section><h4>Daily study</h4>
+   <div class="srow"><span>New kanji per day</span>${seg('newPerDay',[5,10,15,20,30])}</div>
+   <div class="srow"><span>Daily goal (cards)</span>${seg('goal',[10,20,30,50,100])}</div>
+  </section>
+  <section><h4>Backup</h4>
+   <p class="sub2">Your learned kanji, review schedule, quiz history and settings live in this browser only. Save a backup to move them to another device or keep them safe.</p>
+   <div class="row left"><button class="btn pri" id="bk-save">Save backup file</button><button class="btn" id="bk-copy">Copy backup text</button>
+    <label class="btn" for="bk-file">Restore from file</label><input type="file" id="bk-file" accept=".json,application/json" hidden></div>
+   <details><summary>Restore from pasted text</summary><textarea id="bk-text" rows="4" placeholder="Paste backup text here"></textarea><div class="row left"><button class="btn" id="bk-paste">Check backup</button></div></details>
+   <div id="bk-msg" class="bkmsg" ${msg?'':'hidden'}>${msg||''}</div>
+   <p class="sub2">${known.size} learned kanji, ${Object.keys(srs).length} kanji and ${Object.keys(srsW).length} words in reviews, ${nKeys} saved items.</p>
+  </section>
+  <section><h4>About the data</h4>
+   <p class="sub2">Words, readings and meanings: JMdict (EDRDG, CC BY-SA 4.0). Example sentences: Tatoeba (CC BY 2.0 FR), linked to word senses by JMdict_e_examp. JLPT levels: Jonathan Waller’s lists. Word frequency: wordfreq and JMdict’s newspaper ranking. Stroke order: KanjiVG. Parts: KRADFILE (EDRDG) and Kanji alive. Look-alikes: Lars Yencken’s kanji confusion data.</p>
+  </section>
+ </div>`}
+function checkBackup(text){
+ let o;try{o=JSON.parse(text)}catch(e){return settingsView('<b>That isn’t a backup file.</b> Choose a file saved from this app, or paste its full text.')}
+ if(!o||o.app!=='jlpt-kanji-compounds'||!o.data)return settingsView('<b>That file isn’t a backup from this app.</b>');
+ let kn=0,rv=0;try{kn=JSON.parse(o.data.known||'[]').length;rv=Object.keys(JSON.parse(o.data.srs||'{}')).length+Object.keys(JSON.parse(o.data.srsW||'{}')).length}catch(e){}
+ bkPending=o;settingsView(`<b>Backup from ${esc(new Date(o.saved).toLocaleString())}</b><span>${kn} learned kanji and ${rv} cards in reviews. Restoring replaces everything saved in this browser now.</span><div class="row left"><button class="btn pri" id="bk-apply">Replace my progress</button><button class="btn" id="bk-cancel">Cancel</button></div>`)}
+async function saveBackup(){
+ const json=JSON.stringify(backupData()),name=`jlpt-kanji-backup-${new Date().toISOString().slice(0,10)}.json`;
+ try{const dl=typeof claude!=='undefined'&&claude.use?await claude.use('downloads'):null;
+  if(dl){await dl.save({filename:name,data:json});toast('Backup saved.');return}}catch(e){if(e&&e.code==='declined'){toast('Save cancelled.');return}}
+ try{const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([json],{type:'application/json'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);toast('Backup saved to your downloads.')}
+ catch(e){toast('Saving isn’t available here. Use “Copy backup text” instead.')}}
 
 /* ---------- modal events ---------- */
 function modalClick(e){
  const m=e.target.closest('[data-m]');
  if(m){const a=m.dataset.m;
-  if(a==='close')closeModal();else if(a==='go'){showCard()}else if(a==='more'){const nw=newList(5);sess={mode:'srs',queue:nw,newSet:new Set(nw),i:0,total:nw.length,again:0,done:0};showCard()}
-  else if(a==='cram')startCram();else if(a==='reveal'){$('#card').classList.add('rev');$('#card .q')?.remove();$('#card .gr')?.focus()}
-  else if(a==='progress'){closeModal();showProgress()}else if(a==='qgo')quizGo(false);else if(a==='qretry')quizGo(true);else if(a==='qnew')quizStart();
+  if(a==='close')closeModal();else if(a==='go'){showCard()}else if(a==='more'){const nw=newList(5);sess={mode:'srs',queue:nw.map(c=>({t:'k',id:c,isNew:true})),i:0,total:nw.length,again:0,done:0};showCard()}
+  else if(a==='cram')startCram();else if(a==='reveal'){$('#card').classList.add('rev');$('#card .q')?.remove()}
+  else if(a==='progress'){closeModal();showView('progress')}else if(a==='qgo')quizGo(false);else if(a==='qretry')quizGo(true);else if(a==='qnew')quizStart();
+  else if(a==='qadd'){qz.wrong.forEach(q=>addWordReview(q.w));toast(`${qz.wrong.length} word${qz.wrong.length>1?'s':''} added to your reviews.`);m.disabled=true;updateBadge()}
   else if(a==='qnext'){qz.i++;showQ()}
   return true}
  const g=e.target.closest('[data-g]');if(g){grade(+g.dataset.g);return true}
  const qo=e.target.closest('[data-qo]');if(qo){const [k,v]=qo.dataset.qo.split(':');qopt[k]=k==='len'?+v:v;store.set('qopt',qopt);quizStart();return true}
  const qa=e.target.closest('[data-qa]');if(qa){answer(+qa.dataset.qa);return true}
+ const id=e.target.closest('button')?.id;
+ if(id==='bk-save'){saveBackup();return true}
+ if(id==='bk-copy'){const t=JSON.stringify(backupData());navigator.clipboard.writeText(t).then(()=>toast('Backup text copied. Paste it somewhere safe.'),()=>toast('Copying isn’t allowed here.'));return true}
+ if(id==='bk-paste'){checkBackup($('#bk-text').value);return true}
+ if(id==='bk-cancel'){bkPending=null;settingsView();return true}
+ if(id==='bk-apply'&&bkPending){try{Object.keys(backupData().data).forEach(k=>localStorage.removeItem('jlptk.'+k));for(const [k,v] of Object.entries(bkPending.data))localStorage.setItem('jlptk.'+k,v)}catch(e){toast('Restoring failed: this browser blocks saving.');return true}
+  toast('Progress restored. Reloading…');setTimeout(()=>location.reload(),600);return true}
  return false}
+document.addEventListener('change',e=>{if(e.target.id==='bk-file'){const f=e.target.files[0];if(!f)return;f.text().then(checkBackup)}});
 document.addEventListener('submit',e=>{if(e.target.matches('[data-qform]')){e.preventDefault();const v=$('#qin').value;if(v.trim())answer(v)}});
 function modalKey(e){
  if(e.key==='Escape'){closeModal();return}
+ if(mview==='settings')return;
  const card=$('#card');
  if(qz){
   if(e.target.id==='qin')return;
   if(qz.i>=qz.qs.length)return;
+  const q=qz.qs[qz.i];
+  if(e.key===' '&&q.type==='listen'&&!qz.answered){e.preventDefault();say(q.w[1],document.querySelector('.bigplay'));return}
   if(e.key==='Enter'&&qz.answered){e.preventDefault();qz.i++;showQ();return}
-  if(/^[1-4]$/.test(e.key)&&!qz.answered&&qz.qs[qz.i].opts){e.preventDefault();const i=+e.key-1;if(i<qz.qs[qz.i].opts.length)answer(i)}
+  if(/^[1-4]$/.test(e.key)&&!qz.answered&&q.opts){e.preventDefault();const i=+e.key-1;if(i<q.opts.length)answer(i)}
   return}
- if(!sess){if(e.key==='Enter'){const b=card.querySelector('[data-m="qgo"],[data-m="go"]');if(b&&!b.disabled){e.preventDefault();b.click()}}return}
+ if(!sess){if(e.key==='Enter'){const b=card.querySelector('[data-m="qgo"]');if(b&&!b.disabled){e.preventDefault();b.click()}}return}
  if(sess.i>=sess.queue.length&&sess.queue.length)return;
  if(!card.querySelector('.face .gl')){if(e.key==='Enter'){const b=card.querySelector('.btn.pri');if(b){e.preventDefault();b.click()}}return}
  if(!card.classList.contains('rev')){if(e.key===' '||e.key==='Enter'){e.preventDefault();card.classList.add('rev');card.querySelector('.q')?.remove()}return}
  if(sess.mode==='cram'){if(e.key==='1')grade(1);if(e.key==='2'||e.key===' '||e.key==='Enter'){e.preventDefault();grade(3)}return}
  if(/^[1-4]$/.test(e.key))grade(+e.key);else if(e.key===' '||e.key==='Enter'){e.preventDefault();grade(3)}}
 
-/* ---------- progress view ---------- */
-function showProgress(){st.view='progress';document.body.classList.add('detail');entry();$('#entry').scrollTop=0;if(narrow())scrollTo({top:0})}
+/* ---------- page views (progress, weak kanji, find by parts, word) ---------- */
+function showView(v){st.view=v;document.body.classList.add('detail');navState();entry();$('#entry').scrollTop=0;if(narrow())scrollTo({top:0})}
+function navState(){document.querySelectorAll('.nav[data-view]').forEach(b=>b.setAttribute('aria-current',String(st.view===b.dataset.view)))}
 function streak(){let d=DAY(),n=0;const has=x=>act[x]&&act[x].some(v=>v>0);if(!has(d))d--;while(has(d)){n++;d--}return n}
 function progressView(){
  const el=$('#entry'),t=DAY(),today=act[t]||[0,0,0,0],did=today[0]+today[1];
- const due=dueList().length,nw=newList().length,inRev=Object.keys(srs).filter(c=>!known.has(c)).length;
+ const due=dueList().length,nw=newList().length;
  const days=[...Array(30)].map((_,i)=>t-29+i),vals=days.map(d=>{const a=act[d]||[0,0,0,0];return[a[0]+a[1],a[2]]});
  const qq=days.reduce((s,d)=>s+((act[d]||[])[2]||0),0),qc=days.reduce((s,d)=>s+((act[d]||[])[3]||0),0);
  const lvRows=LV.map(n=>{const L=K.filter(k=>k[1]===n),kn=L.filter(k=>known.has(k[0])).length,rv=L.filter(k=>srs[k[0]]&&!known.has(k[0])).length;return{n,t:L.length,kn,rv}});
  const next=newList(8);
- const seg=(key,opts)=>`<div class="seg" role="group">${opts.map(v=>`<button data-cfg="${key}:${v}" aria-pressed="${cfg[key]===v}">${v}</button>`).join('')}</div>`;
  el.innerHTML=`<button class="btn back" id="back">Back to index</button>
  <div class="pv">
-  <header class="pvh"><h2>Your progress</h2><p>Saved in this browser. Learned kanji: ${known.size} of ${K.length}.</p></header>
+  <header class="pvh"><h2>Your progress</h2><p>${known.size} of ${K.length} kanji learned · ${Object.keys(srsW).length} words in reviews</p></header>
   <div class="kpis big">
    <div><b>${streak()}</b><span>day streak</span></div>
    <div><b>${did}<small>/${cfg.goal}</small></b><span>cards today</span><i class="gbar"><i style="width:${Math.min(100,100*did/cfg.goal)}%"></i></i></div>
    <div><b>${due+nw}</b><span>ready to review</span></div>
-   <div><b>${qq?Math.round(100*qc/qq)+'%':'–'}</b><span>quiz accuracy, 30 days${qq?` (${qq} questions)`:''}</span></div>
+   <div><b>${qq?Math.round(100*qc/qq)+'%':'–'}</b><span>quiz accuracy, 30 days</span></div>
   </div>
-  <div class="row left"><button class="btn pri" id="pv-review">Start review</button><button class="btn" id="pv-quiz">Take a quiz</button></div>
+  <div class="row left"><button class="btn pri" id="pv-review">Start review</button><button class="btn" id="pv-quiz">Take a quiz</button><button class="link" id="nav-settings2">Change daily goal</button></div>
   <section class="pvs"><h3>Last 30 days</h3><div class="fig" id="actfig" aria-label="Cards reviewed per day for the last 30 days"></div>
    <div class="legend2"><span><i class="lc"></i>Cards reviewed</span><span><i class="lq"></i>Quiz questions</span><span><i class="lg"></i>Daily goal (${cfg.goal})</span></div></section>
   <section class="pvs"><h3>By level</h3><div class="lvt">${lvRows.map(r=>`<div class="lvr"><b>N${r.n}</b><div class="sb">${[['k',r.kn],['r',r.rv],['n',r.t-r.kn-r.rv]].filter(x=>x[1]>0).map(x=>`<i class="${x[0]}" style="flex:${x[1]}"></i>`).join('')}</div><span>${r.kn} learned · ${r.rv} in review · ${r.t-r.kn-r.rv} not started</span></div>`).join('')}</div>
    <div class="legend2"><span><i class="lk"></i>Learned</span><span><i class="lr"></i>In review</span><span><i class="ln"></i>Not started</span></div></section>
-  <section class="pvs"><h3>Study next in N${st.level}</h3><p class="sub2">The most common N${st.level} kanji you haven’t started, in the order reviews will introduce them.</p>
+  <section class="pvs"><h3>Study next in N${st.level}</h3>
    <div class="nextk">${next.length?next.map(c=>{const k=KM.get(c);return `<button class="simk" data-k="${esc(c)}"><span class="mc" lang="ja">${esc(c)}</span><span>${esc((k[4][0]||'').toLowerCase())}</span></button>`}).join(''):`<p class="sub2">You’ve started every N${st.level} kanji.</p>`}</div></section>
-  <section class="pvs"><h3>Settings</h3>
-   <div class="qset"><span>New kanji per day</span>${seg('newPerDay',[5,10,15,20,30])}</div>
-   <div class="qset"><span>Daily goal (cards)</span>${seg('goal',[10,20,30,50,100])}</div></section>
  </div>`;
  const fig=$('#actfig');const draw=()=>{const Wd=fig.clientWidth,H=fig.clientHeight,pad=24,max=Math.max(cfg.goal,...vals.map(v=>v[0]+v[1]),1),bw=(Wd-pad)/30;
   const y=v=>H-18-(H-30)*v/max;
@@ -918,14 +1138,37 @@ function progressView(){
   <line x1="${pad}" x2="${Wd}" y1="${y(cfg.goal)}" y2="${y(cfg.goal)}" class="gl2"/><text x="0" y="${y(cfg.goal)+4}" class="ax">${cfg.goal}</text>
   <text x="${pad}" y="${H-3}" class="ax">30 days ago</text><text x="${Wd}" y="${H-3}" class="ax" text-anchor="end">Today</text></svg>`};
  draw();new ResizeObserver(draw).observe(fig)}
-
-/* ---------- word detail view ---------- */
-function openWord(word){if(!WI.has(word))return;st.view='word';st.word=word;document.body.classList.add('detail');entry();$('#entry').scrollTop=0;if(narrow())scrollTo({top:0})}
+function weakView(){
+ const el=$('#entry'),L=weakList(),WL=Object.entries(qmissW).filter(([k,n])=>n>0&&wordByKey(k)).sort((a,b)=>b[1]-a[1]).slice(0,40);
+ el.innerHTML=`<button class="btn back" id="back">Back to index</button>
+ <div class="pv">
+  <header class="pvh"><h2>Weak kanji</h2><p>Kanji you forgot in reviews or missed in quizzes. A kanji leaves this list as you get it right again.</p></header>
+  ${L.length?`<div class="row left"><button class="btn pri" id="weak-practise">Practise these ${Math.min(20,L.length)} kanji</button></div>
+  <div class="nextk">${L.map(([c,n])=>{const k=KM.get(c),s=srs[c];return `<button class="simk weak" data-k="${esc(c)}"><span class="mc" lang="ja">${esc(c)}</span><span>${esc((k[4][0]||'').toLowerCase())}</span><small>${[s&&s[4]?`forgot ${s[4]}×`:'',qmiss[c]?`missed ${qmiss[c]}×`:''].filter(Boolean).join(' · ')}</small></button>`}).join('')}</div>`
+  :'<p class="lead">Nothing here yet. Kanji you forget in reviews or miss in quizzes will appear here so you can practise them.</p>'}
+  ${WL.length?`<section class="pvs"><h3>Words you missed in quizzes</h3><div class="row left"><button class="btn" id="weak-addwords">Add all ${WL.length} to my reviews</button></div>
+   <ul class="mini">${WL.map(([k,n])=>{const x=wordByKey(k);return `<li><button data-w="${esc(x[0])}"><span class="mc" lang="ja">${esc(x[0])}</span><span class="r" lang="ja">${esc(x[1])}</span><span class="m">${esc(gloss(x))} · missed ${n}×</span></button></li>`}).join('')}</ul></section>`:''}
+ </div>`}
+function radView(){
+ const el=$('#entry');if(!PARTS){el.innerHTML='<div class="empty">Loading parts…</div>';return}
+ const sel=st.rsel||[];const match=sel.length?K.filter(k=>sel.every(p=>(PARTS.parts[k[0]]||[]).includes(p))):[];
+ const possible=new Set();if(sel.length)match.forEach(k=>(PARTS.parts[k[0]]||[]).forEach(p=>possible.add(p)));
+ const groups={};Object.entries(PARTS.rad).forEach(([p,m])=>{(groups[m[0]]=groups[m[0]]||[]).push(p)});
+ const res=match.sort((a,b)=>(b[1]-a[1])||((a[3]||9999)-(b[3]||9999)));
+ el.innerHTML=`<button class="btn back" id="back">Back to index</button>
+ <div class="pv">
+  <header class="pvh"><h2>Find kanji by parts</h2><p>Pick the parts you can see in a kanji. The list narrows with each part, and parts that can’t combine are dimmed.</p></header>
+  <div class="rsel">${sel.length?sel.map(p=>`<button class="part sm" data-rad="${esc(p)}" aria-pressed="true"><span class="ps mc" lang="ja">${esc(p)}</span><span class="pn">${esc((PARTS.rad[p]||[])[2]||'')}</span><span aria-hidden="true">✕</span></button>`).join('')+'<button class="link" id="rad-clear">Clear all</button>':'<p class="sub2">No parts chosen yet.</p>'}</div>
+  ${sel.length?`<section class="pvs"><h3>${res.length} matching kanji</h3>${res.length?`<div class="nextk">${res.slice(0,120).map(k=>`<button class="simk" data-k="${esc(k[0])}"><span class="mc" lang="ja">${esc(k[0])}</span><span>${esc((k[4][0]||'').toLowerCase())}</span><small>N${k[1]}</small></button>`).join('')}</div>`:'<p class="sub2">No JLPT kanji has all of these parts. Remove one.</p>'}</section>`:''}
+  <section class="pvs"><h3>Parts by stroke count</h3><div class="rgrid">${Object.keys(groups).sort((a,b)=>a-b).map(n=>`<div class="rg"><span class="rn">${n}</span>${groups[n].map(p=>{const on=sel.includes(p),dis=sel.length&&!on&&!possible.has(p);return `<button class="rp mc" data-rad="${esc(p)}" aria-pressed="${on}" ${dis?'disabled':''} title="${esc((PARTS.rad[p]||[])[2]||p)}" lang="ja">${esc(p)}</button>`}).join('')}</div>`).join('')}</div></section>
+ </div>`}
+function openWord(word,reading){const i=reading?W.findIndex(x=>x[0]===word&&x[1]===reading):WI.get(word);if(i==null||i<0)return;st.view='word';st.word=W[i][0];st.wordR=W[i][1];document.body.classList.add('detail');navState();entry();$('#entry').scrollTop=0;if(narrow())scrollTo({top:0})}
 function wordView(){
- const el=$('#entry'),w=W[WI.get(st.word)];if(!w){st.view='kanji';return entry()}
- const a=align(w[0],w[1]),ks=[...new Set([...w[0]].filter(isK))];
+ const el=$('#entry');const w=W.find(x=>x[0]===st.word&&(!st.wordR||x[1]===st.wordR))||W[WI.get(st.word)];if(!w){st.view='kanji';return entry()}
+ const a=align(w[0],w[1]),ks=[...new Set([...w[0]].filter(isK))],inRev=!!srsW[wkey(w)];
  const ruby=a?a.map(p=>p.s!=null?esc(p.s):`<ruby>${p.c==='々'?esc(p.c):linkK(p.c,'')}<rt class="hl ${p.type==='?'?'':p.type}">${esc(p.v)}</rt></ruby>`).join(''):`<ruby>${[...w[0]].map(x=>isK(x)?linkK(x,''):esc(x)).join('')}<rt>${esc(w[1])}</rt></ruby>`;
  const senses=w[2].split(';').map(s=>s.trim()).filter(Boolean);
+ const homo=W.filter(x=>x[0]===w[0]&&x[1]!==w[1]);
  const more=ks.map(c=>{const L=(IDX.get(c)||[]).map(i=>W[i]).filter(x=>x[0]!==w[0]&&!/[〜～~]/.test(x[0])).slice(0,6);return{c,L}});
  el.innerHTML=`<button class="btn back" id="back">Back to index</button>
  <div class="wv">
@@ -933,15 +1176,18 @@ function wordView(){
   <header class="wvh"><div class="wbig mc" lang="ja">${ruby}</div>
    <div class="wmeta"><div class="wrd"><span class="rl" lang="ja">${esc(w[1])}</span><button class="play" data-say="${esc(w[1])}" aria-label="Listen">${SPK}</button></div>
     <ol class="senses">${senses.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>
-    <div class="facts"><span class="fq inl">${freqMeter(w)}</span>${w[3]?`<span><b>N${w[3]}</b>vocabulary</span>`:'<span>Not on the JLPT vocabulary lists</span>'}${a?'':'<span class="use irr" style="margin:0">special reading</span>'}${w[6]?'<span class="use irr" style="margin:0">usually written in kana</span>':''}</div></div></header>
+    <div class="facts"><span class="fq inl">${freqMeter(w)}</span>${w[3]?`<span><b>N${w[3]}</b>vocabulary</span>`:''}${a?'':'<span class="use irr" style="margin:0">special reading</span>'}${w[6]?'<span class="use irr" style="margin:0">usually written in kana</span>':''}</div>
+    <div class="row left"><button class="btn ${inRev?'learned':'pri'}" id="wrev">${inRev?'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5 10 17 19 7"/></svg>In my reviews':'Add to my reviews'}</button>${homo.length?`<span class="sub2" style="margin:0">Also read ${homo.map(x=>`<button class="link" data-w="${esc(x[0])}" data-wr="${esc(x[1])}">${esc(x[1])}</button>`).join(', ')}</span>`:''}</div></div></header>
+  <section class="pvs"><h3>Example sentences</h3><div id="sents"><p class="sub2">Loading…</p></div></section>
   <section class="pvs"><h3>Kanji in this word</h3><div class="kin">${ks.map(c=>{const k=KM.get(c),p=a&&a.find(x=>x.c===c);return `<button class="kcard" data-k="${esc(c)}"><span class="mc kc" lang="ja">${esc(c)}</span><span class="kt"><b>${esc(k[4].slice(0,2).join(', '))}</b><span>N${k[1]} · ${k[2]} strokes</span>${p&&p.type!=='?'?`<span class="use ${p.type}" style="margin:0">${esc(p.v)}, ${TY[p.type]}</span>`:'<span class="use irr" style="margin:0">part of a special reading</span>'}</span></button>`}).join('')}</div></section>
-  ${more.map(m=>m.L.length?`<section class="pvs"><h3>More words with ${esc(m.c)}</h3><ul class="mini">${m.L.map(x=>`<li><button data-w="${esc(x[0])}"><span class="mc" lang="ja">${esc(x[0])}</span><span class="r" lang="ja">${readingLine(x,m.c,align(x[0],x[1]))}</span><span class="m">${esc(gloss(x))}</span></button></li>`).join('')}</ul></section>`:'').join('')}
- </div>`}
+  ${more.map(m=>m.L.length?`<section class="pvs"><h3>More words with ${esc(m.c)}</h3><ul class="mini">${m.L.map(x=>`<li><button data-w="${esc(x[0])}" data-wr="${esc(x[1])}"><span class="mc" lang="ja">${esc(x[0])}</span><span class="r" lang="ja">${readingLine(x,m.c,align(x[0],x[1]))}</span><span class="m">${esc(gloss(x))}</span></button></li>`).join('')}</ul></section>`:'').join('')}
+ </div>`;
+ loadEx(w).then(L=>{const d=$('#sents');if(d&&st.view==='word'&&st.word===w[0])d.innerHTML=sentBlock(L,w[0],3)})}
 
 /* ---------- parts and look-alikes ---------- */
 let PARTS=null;
 function partsBand(c){
- if(!PARTS)return '';
+ if(!PARTS)return '<p class="sub2" style="padding:20px clamp(20px,3vw,44px)">Loading parts…</p>';
  const P=PARTS.parts[c]||[],sim=(PARTS.sim[c]||[]).filter(x=>KM.has(x));
  const withPart=st.part&&P.includes(st.part)?K.filter(k=>k[0]!==c&&(PARTS.parts[k[0]]||[]).includes(st.part)).sort((a,b)=>(b[1]-a[1])||((a[3]||9999)-(b[3]||9999))):null;
  return `<section class="band2">
@@ -949,6 +1195,27 @@ function partsBand(c){
    ${withPart?`<div class="withp"><p>${withPart.length} other JLPT kanji contain ${esc(st.part)}</p><div class="kchips">${withPart.slice(0,48).map(k=>`<button data-k="${esc(k[0])}" title="N${k[1]} · ${esc(k[4][0]||'')}"><span lang="ja">${esc(k[0])}</span><small>N${k[1]}</small></button>`).join('')}${withPart.length>48?`<span class="more2">+${withPart.length-48} more</span>`:''}</div></div>`:'<p class="sub2">Select a part to see other kanji built from it.</p>'}</div>
   <div><h3>Easily confused with</h3>${sim.length?`<div class="sims">${sim.map(x=>{const k=KM.get(x);return `<button class="simk" data-k="${esc(x)}"><span class="mc" lang="ja">${esc(x)}</span><span>${esc((k[4][0]||'').toLowerCase())}</span><small>N${k[1]}</small></button>`}).join('')}</div>`:'<p class="sub2">No common look-alikes.</p>'}</div>
  </section>`}
+
+/* ---------- extra clicks: navigation, tabs, view options, word reviews, parts finder ---------- */
+function extraClick(e){
+ const t=e.target.closest('[data-tab]');if(t){st.tab=t.dataset.tab;store.set('tab',st.tab);const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return true}
+ const rs=e.target.closest('[data-reset]');if(rs){const k=rs.dataset.reset;const D={maxLv:1,rmode:'ruby',sort:'freq',jlptOnly:false,hideMean:false};
+  if(k==='rf')st.rf=null;else{st[k]=D[k];store.set(k==='sort'?'sort':k,st[k])}st.page=0;revealed.clear();const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return true}
+ const rd=e.target.closest('[data-rad]');if(rd&&!rd.disabled){const p=rd.dataset.rad;st.rsel=st.rsel||[];st.rsel=st.rsel.includes(p)?st.rsel.filter(x=>x!==p):[...st.rsel,p];const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return true}
+ const wr=e.target.closest('[data-wr]');if(wr){openWord(wr.dataset.w,wr.dataset.wr);return true}
+ const cf=e.target.closest('[data-cfg]');if(cf&&mview==='settings'){const [k,v]=cf.dataset.cfg.split(':');cfg[k]=+v;store.set('cfg',cfg);updateBadge();settingsView();return true}
+ const th=e.target.closest('[data-theme-set]');if(th&&mview==='settings'){theme=th.dataset.themeSet;store.set('theme',theme);applyTheme();settingsView();return true}
+ const id=e.target.closest('button')?.id;if(!id)return false;
+ if(id==='nav-settings'||id==='nav-settings2'){settingsView();return true}
+ if(id==='nav-weak'){showView('weak');return true}
+ if(id==='nav-parts'){showView('radicals');return true}
+ if(id==='nav-progress'){showView('progress');return true}
+ if(id==='rad-clear'){st.rsel=[];entry();return true}
+ if(id==='weak-practise'){startCram(weakList().slice(0,20).map(x=>x[0]));return true}
+ if(id==='weak-addwords'){Object.keys(qmissW).forEach(k=>{const w=wordByKey(k);if(w&&qmissW[k]>0)addWordReview(w)});toast('Words added to your reviews.');updateBadge();return true}
+ if(id==='wrev'){const w=W.find(x=>x[0]===st.word&&x[1]===st.wordR)||W[WI.get(st.word)];if(srsW[wkey(w)]){removeWordReview(w);toast('Removed from your reviews.')}else{addWordReview(w);toast('Added. It will come up in your next review.')}updateBadge();const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return true}
+ if(id==='zin'||id==='zout'){zoomBy(id==='zin'?1:-1);return true}
+ return false}
 
 /* ---------- search helpers ---------- */
 function kanaOf(q){if(/[ぁ-ゖァ-ヺー]/.test(q))return kata2hira(q);if(/^[a-z' -]+$/i.test(q)&&window.wanakana){const h=wanakana.toHiragana(q.replace(/[\s']/g,''));return /^[ぁ-ゖー]+$/.test(h)?h:null}return null}
@@ -966,21 +1233,24 @@ document.addEventListener('click',e=>{
  const ddb=e.target.closest('.ddb');if(ddb){const d=ddb.closest('.dd');d.classList.contains('open')?closeDD(false):openDD(d);return}
  if(!e.target.closest('.dd'))closeDD(false);
  if(modal().classList.contains('open')){if(e.target.id==='fc'){closeModal();return}if(modalClick(e))return}
+ if(extraClick(e))return;
+ if(e.target.closest('[data-navt]')){toggleNav();return}
  const pt=e.target.closest('[data-part]');if(pt){st.part=st.part===pt.dataset.part?null:pt.dataset.part;const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return}
  const cf=e.target.closest('[data-cfg]');if(cf){const [k,v]=cf.dataset.cfg.split(':');cfg[k]=+v;store.set('cfg',cfg);updateBadge();const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return}
  const rf=e.target.closest('[data-rf]');if(rf){st.rf=st.rf===rf.dataset.rf?null:rf.dataset.rf;st.page=0;if(rf.dataset.say&&st.rf)say(rf.dataset.say,null);const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return}
  const sy=e.target.closest('[data-say]');if(sy){say(sy.dataset.say,sy);return}
  const rm=e.target.closest('[data-revm]');if(rm){revealed.add('m:'+rm.dataset.revm);const n=rm.nextElementSibling;if(n){n.hidden=false;n.classList.add('shown')}rm.remove();return}
+ const th=e.target.closest('[data-theme-set]');if(th){theme=th.dataset.themeSet;store.set('theme',theme);applyTheme();return}
  const ly=e.target.closest('[data-layout]');if(ly){st.layout=ly.dataset.layout;store.set('layout',st.layout);const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc;return}
  const rv=e.target.closest('.reveal');if(rv){revealed.add(rv.dataset.rev);const n=rv.nextElementSibling;if(n)n.hidden=false;rv.remove();say(rv.dataset.r);return}
  const lv=e.target.closest('[data-lv]');if(lv){st.level=+lv.dataset.lv;st.q='';$('#q').value='';store.set('level',st.level);document.body.classList.remove('detail');levels();grid();$('#kgrid').scrollTop=0;return}
  const kk=e.target.closest('[data-k]');if(kk){open(kk.dataset.k);return}
- const ww=e.target.closest('[data-w]');if(ww){openWord(ww.dataset.w);return}
+ const ww=e.target.closest('[data-w]');if(ww){openWord(ww.dataset.w,ww.dataset.wr||ww.dataset.wr2);return}
  const pg=e.target.closest('[data-page]');if(pg){if(!pg.disabled)goPage(+pg.dataset.page);return}
  const md=e.target.closest('[data-mode]');if(md){st.mode=md.dataset.mode;st.page=0;store.set('mode',st.mode);entry();return}
  const id=e.target.closest('button')?.id;
  if(id==='zin')zoomBy(1);if(id==='zout')zoomBy(-1);
- if(id==='nav-review'||id==='pv-review')startReview();if(id==='nav-quiz'||id==='pv-quiz')quizStart();if(id==='nav-progress')showProgress();
+ if(id==='nav-review'||id==='pv-review')startReview();if(id==='nav-quiz'||id==='pv-quiz')quizStart();
  if(id==='replay')animate();
  if(id==='back'){document.body.classList.remove('detail');grid();scrollTo({top:0})}
  if(id==='sayk'){const k=KM.get(st.cur);say([...k[5],...k[6].map(clean)].join('、'),e.target.closest('button'))}
@@ -989,11 +1259,11 @@ document.addEventListener('click',e=>{
  if(id==='known'){const c=st.cur;known.has(c)?known.delete(c):known.add(c);store.set('known',[...known]);levels();grid();const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc}
 });
 document.addEventListener('change',e=>{const id=e.target.id;const keep=()=>{const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc};
- if(e.target===hideKnown){store.set('hideKnown',hideKnown.checked);grid()}
- if(e.target===byStroke){store.set('byStroke',byStroke.checked);grid()}});
+});
 let qt;$('#q').addEventListener('input',e=>{clearTimeout(qt);qt=setTimeout(()=>{st.q=e.target.value.trim();levels();grid();
  const ch=[...st.q].filter(isK);if(st.q.length>=2&&WI.has(st.q)&&!narrow())openWord(st.q);else if(ch.length===1&&st.q.length===1)open(ch[0]);else if(narrow())document.body.classList.remove('detail')},180)});
 document.addEventListener('keydown',e=>{
+ if((e.ctrlKey||e.metaKey)&&(e.key==='b'||e.key==='B')){e.preventDefault();toggleNav();return}
  if((e.ctrlKey||e.metaKey)&&['=','+','-','0'].includes(e.key)){e.preventDefault();if(e.key==='0'){zi=2;applyZoom()}else zoomBy(e.key==='-'?-1:1);return}
  if(modal().classList.contains('open')){modalKey(e);return}
  if(e.target.matches('input,select')){if(e.key==='Escape')e.target.blur();return}
@@ -1011,8 +1281,8 @@ Promise.all([fetch('kanji.json').then(r=>r.json()),fetch('words.json').then(r=>r
  W.forEach((x,i)=>{for(const c of new Set(x[0]))if(KM.has(c)){let a=IDX.get(c);if(!a)IDX.set(c,a=[]);a.push(i)}});
  if(!st.cur||!KM.has(st.cur))st.cur=K.find(x=>x[1]===st.level)[0];
  if(!narrow())document.body.classList.add('detail');
- levels();grid();entry();updateBadge();
- fetch('parts.json').then(r=>r.json()).then(p=>{PARTS=p;if(st.view!=='word'&&st.view!=='progress'){const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc}}).catch(()=>{});
+ levels();grid();entry();updateBadge();idxOpts();
+ fetch('parts.json').then(r=>r.json()).then(p=>{PARTS=p;if(st.view!=='word'&&st.view!=='progress'){updateBadge();const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc}}).catch(()=>{});
  fetch('strokes.json').then(r=>r.json()).then(s=>{ST=s;const sc=$('#entry').scrollTop;entry();$('#entry').scrollTop=sc}).catch(()=>{});
 }).catch(()=>{$('#entry').innerHTML='<div class="empty">The kanji data didn’t load. Reload the app to try again.</div>';$('#gtitle').textContent='Not loaded'});
 }

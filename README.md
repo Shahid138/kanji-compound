@@ -5,8 +5,9 @@ A study app for JLPT kanji (N5 to N1). Pick a level, open a kanji, and see its r
 ## Features
 
 - 2,211 JLPT kanji across N5–N1, with meanings, on'yomi and kun'yomi
-- 16,000+ words, filtered to words whose every kanji is on a JLPT list
-- Words ordered by real-world frequency, 10 per page
+- 17,000+ words, filtered to words whose every kanji is on a JLPT list; spellings, readings and meanings from JMdict's common-word set
+- Words ordered by real-world frequency, 10 per page, or as compact furigana tiles grouped by reading
+- Hide meanings (and readings) to test yourself
 - Furigana split per kanji, with the studied kanji's reading highlighted
 - Filter words by reading, word type and the highest level of kanji they contain
 - Animated stroke order
@@ -36,8 +37,8 @@ Then open http://localhost:8000.
 
 ## Data and licences
 
-- Words: [JMdict](https://www.edrdg.org/jmdict/j_jmdict.html) by the Electronic Dictionary Research and Development Group, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-- JLPT vocabulary levels: [open-anki-jlpt-decks](https://github.com/jamsinclair/open-anki-jlpt-decks)
+- Words: [JMdict](https://www.edrdg.org/jmdict/j_jmdict.html) (release 2026-11-04, common entries, vulgar and X-rated senses excluded) by the Electronic Dictionary Research and Development Group, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
+- JLPT vocabulary levels: [open-anki-jlpt-decks](https://github.com/jamsinclair/open-anki-jlpt-decks), attached only where the word and its reading both match JMdict
 - Kanji data and JLPT kanji levels: [kanji-data](https://github.com/davidluzgouveia/kanji-data), based on Jonathan Waller's JLPT lists and KANJIDIC
 - Word frequency: [wordfreq](https://github.com/rspeer/wordfreq) by Robyn Speer (Wikipedia, subtitles, news, books, web text; data CC BY-SA 4.0), with JMdict's newspaper frequency bands for words the corpus splits apart
 - Kanji parts: [KRADFILE/RADKFILE](https://www.edrdg.org/krad/kradinf.html) by EDRDG, CC BY-SA 4.0; radical names from [Kanji alive](https://github.com/kanjialive/kanji-data-media), CC BY 4.0
